@@ -1,6 +1,7 @@
 package com.login.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -43,28 +44,9 @@ public class LoginDao extends SqlMapConfig {
 		
 		try(SqlSession session = getSessionFactory().openSession(true)){
 			res = session.insert(namespace+"insert",dto);
-			
 		}
 		
 		return res;
-	}
-	
-	
-	public LoginDto idCheck(String member_id) {
-		
-		SqlSession session = null;
-		LoginDto dto = null;
-		
-		try {
-			session = getSessionFactory().openSession();
-			dto = session.selectOne(namespace+"idCheck"+member_id);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return dto;
-		
 	}
 	
 
@@ -92,6 +74,43 @@ public class LoginDao extends SqlMapConfig {
 		
 		return res;
 		
+		
+	}
+	
+	public String findId(Map map) {
+		SqlSession session = null;
+		String findid = null;
+		
+		session = getSessionFactory().openSession();
+		findid = session.selectOne(namespace+"findid",map);
+		
+		session.close();
+		
+		return findid;
+	}
+	
+	
+	public String findPw(Map map) {
+		SqlSession session = null;
+		String findpw = null;
+		
+		session = getSessionFactory().openSession();
+		findpw = session.selectOne(namespace+"findpw",map);
+		
+		session.close();
+		
+		return findpw;
+	}
+	
+	public String idCheck(String member_id) {
+		SqlSession session = null;
+		String id = null;
+		
+		session = getSessionFactory().openSession();
+		id = session.selectOne(namespace+"idcheck",member_id);
+		session.close();
+		
+		return id;
 		
 	}
 

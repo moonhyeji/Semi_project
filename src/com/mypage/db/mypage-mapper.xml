@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mypage.mapper">
+	<resultMap type="myPageDto" id="myPageMap">
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_pw" column="MEMBER_PW"/>
+		<result property="member_name" column="MEMBER_NAME"/>
+		<result property="member_birth" column="MEMBER_BIRTH"/>
+		<result property="member_platform" column="MEMBER_PLATFORM"/>
+		<result property="member_addr" column="MEMBER_ADDR"/>
+		<result property="member_phone" column="MEMBER_PHONE"/>
+		<result property="member_email" column="MEMBER_EMAIL"/>
+		<result property="member_gender" column="MEMBER_GENDER"/>
+		<result property="member_select" column="MEMBER_SELECT"/> <!--관리자 0 ,강사 1 , 학생 2  -->
+		<result property="member_question" column="MEMBER_QUESTION"/>
+		<result property="member_answer" column="MEMBER_ANSWER"/>
+		<result property="member_del" column="MEMBER_DEL"/>  <!-- 가입중 0 , 탈퇴 1  -->
+		<result property="member_regdate" column="MEMBER_REGDATE"/>
+	</resultMap>
+	
+	<select id="selectstu" parameterType="String" resultType="myPageDto">
+		SELECT MEMBER_NAME,MEMBER_PHONE,MEMBER_ADDR
+		FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	
+	
+	<select id="selecttch" parameterType="String" resultType="myPageDto">
+		SELECT MEMBER_NAME,MEMBER_PHONE,MEMBER_ADDR
+		FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	
+	<update id="updateinfo" parameterType="map" >
+	    UPDATE MEMEBER 
+	    SET MEMBER_NAME = #{member_name},MEMBER_PHONE = #{member_phone},MEMBER_ADDR= #{member_addr}
+	    WHERE MEMBER_ID = #{member_id}
+     </update>
+
+
+
+	<select id="deleteinfo" parameterType="String" resultType="myPageDto">
+	   UPDATE MEMEBER
+	   SET MEMBER_DEL = '1'
+	   WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	
+   
+</mapper>
+  
