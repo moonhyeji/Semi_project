@@ -1,12 +1,17 @@
-<%@page import="com.mypage.dto.myPageDto"%>
-<%@page import="com.mypage.biz.myPageBiz"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="com.login.biz.LoginBiz"%>
+<%@page import="com.login.dto.LoginDto"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%
+request.setCharacterEncoding("UTF-8");
+response.setContentType("texthtml; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>ÇÐ»ý ÆäÀÌÁö</title>
+<meta charset="UTF-8">
+<title>í•™ìƒ íŽ˜ì´ì§€</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <style type="text/css">
 	
@@ -43,34 +48,35 @@
 </style>
 </head>
 <body>
-
-
 <%
-String member_id = request.getParameter("member_id");
+	String member_id = request.getParameter("id");
 
-myPageBiz biz = new myPageBiz();
-myPageDto dto = biz.selectstu(member_id);
+	LoginDto dto = new LoginDto();
+	LoginBiz biz = new LoginBiz();
 
-%> 
-
-	<form>
+	dto = biz.mypageView(member_id);
+	
+%>
+	<form action="mypage_info_update_stu.jsp" method="post">
+		<input type="hidden" name="member_id" value="<%=member_id%>">
 		<h1><a href="../index.jsp">LearnWay</a></h1>
-		<h3>¸¶ÀÌÆäÀÌÁö(Student)</h3>
+		<h3>ë§ˆì´íŽ˜ì´ì§€(Student)</h3>
 		<div class="form-group">
 			<img class="tec_img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg"><br>
-			<input class="btn btn-dark btn-sm" type="button" value="¼öÁ¤" onclick="location.href='mypage_updateres.jsp'">
+			<input class="btn btn-dark btn-sm" type="submit" value="ë‚´ì •ë³´ ìˆ˜ì •" >
 		</div>
 		<div class="form-group" id="div_01">
-			<label for="name">ÀÌ¸§</label><br>
-			<input type="text" class="form-control" id="name" name="teacher_name" value="<%=dto.getMember_name() %> readonly="readonly"><br>
-			<label for="phone">ÇÚµåÆù¹øÈ£</label><br>
-			<input type="text" class="form-control" id="phone" name="teacher_phone" value="<%=dto.getMember_phone()%>" readonly="readonly"><br>
-			<label for="addr">ÁÖ¼Ò</label><br>
-			<input type="text" class="form-control" id="addr" name="teacher_name" value="<%=dto.getMember_addr() %>" readonly="readonly">
+			<label for="name">ì´ë¦„</label><br>
+			<input type="text" class="form-control" id="name" name="student_name" readonly="readonly" value="<%=dto.getMember_name()%>"><br>
+			<label for="phone">í•¸ë“œí°ë²ˆí˜¸</label><br>
+			<input type="text" class="form-control" id="phone" name="student_phone" readonly="readonly"value="<%=dto.getMember_phone()%>"><br>
+			<label for="addr">ì£¼ì†Œ</label><br>
+			<input type="text" class="form-control" id="addr" name="student_addr" readonly="readonly" value="<%=dto.getMember_addr()%>">
 		</div>
 		<div class="form-group" style="margin-top: 20px;">
-			<input class="btn btn-dark" type="button" value="¼ö°­ °­ÀÇ µè±â" onclick=""><br><br>
-			<input class="btn btn-dark" type="button" value="È¸¿ø Å»Åð" onclick="location.href='index.jsp'">
+			<input class="btn btn-dark" type="button" value="ìˆ˜ê°• ê°•ì˜ ë“£ê¸°" onclick=""><br><br>
+			<input class="btn btn-dark" type="button" value="íšŒì› íƒˆí‡´" onclick="location.href='mypage_info_delete.jsp?member_id=<%=member_id%>'"><br><br>
+			<input class="btn btn-dark" type="button" value="ëŒì•„ê°€ê¸°" onclick="location.href='../index.jsp?id=<%=member_id%>'">
 		</div>
 	</form>
 </body>

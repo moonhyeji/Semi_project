@@ -1,5 +1,7 @@
-<%@page import="com.mypage.dto.myPageDto"%>
-<%@page import="com.mypage.biz.myPageBiz"%>
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.login.biz.LoginBiz"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -20,17 +22,26 @@ String member_phone = request.getParameter("member_phone");
 String member_addr = request.getParameter("member_addr");
 
 
-myPageBiz biz = new myPageBiz();
-int res = biz.updateinfo(member_id, member_name, member_phone, member_addr );
+Map map = new HashMap();
+map.put("item1",member_id);
+map.put("item2",member_name);
+map.put("item3",member_phone);
+map.put("item4",member_addr);
+
+LoginBiz biz = new LoginBiz();
+
+int res = biz.mypageupdate(map);
+
+System.out.println(res);
 
 if(res > 0){ 
 %>
 
 
-<script type="text/javascript">
-  alert("강사정보 수정 성공");
-  location.href="mypage_stu.jsp?member_id=<%=member_id %>";
-</script>     
+  <script type="text/javascript">
+  	 alert("정보 수정 성공");
+	 location.href="mypage_stu.jsp?id=<%=member_id %>";
+  </script>     
 
 
 <%
@@ -38,8 +49,8 @@ if(res > 0){
 %>
 
   <script type="text/javascript">
-  alert("정보 수정 실패");
-  location.href="mypage_info_update.jsp?member_id=<%=member_id%>";
+  	alert("정보 수정 실패");
+  	location.href="mypage_info_update.jsp?_id=<%=member_id%>";
   </script>
   
 <%

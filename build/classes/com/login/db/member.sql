@@ -7,7 +7,7 @@ create table member(
     member_id varchar2(20) unique not null,
     member_pw VARCHAR2(20) not null,
     member_name varchar2(20) not null,
-    memeber_birth varchar2(20) not null,
+    memeber_birth varchar2(20) not null, 
     member_platform varchar2(10) check(member_platform in('kakao','naver','google','facebook')),
     member_addr VARCHAR2(500) not null,
     member_phone VARCHAR2(20) not null,
@@ -20,7 +20,14 @@ create table member(
     member_regdate date not null
     );
     
+    
+   
+	
+	
 select * from member;
+
+
+
 
 insert into member
 values(member_seq.nextval,'admin','admin1234','관리자','20210420',null,'kh정보교육원','010-0000-0000',
@@ -40,7 +47,6 @@ create table board(
 
 
 create SEQUENCE classboard_seq;
-
 create table class_board(
     class_no int primary key,
     class_tag int check(class_tag in(0,1,2,3,4,5)), -- 0:IT , 1:cook , 2:language, 3: stock , 4: art , 5: sports
@@ -57,17 +63,6 @@ create table class_board(
     class_eventlastdate date not null
 );
 
-drop table class_board;
-delete * from table CLASS_BOARD;
-
-insert into class_board
-values(classboard_seq.nextval,'0','첫번쨰 강의제목','강사입니다3','강의 내용',1000 ,20 ,
-'20100101','2021-04-23',0, 0, '20100101','2021/04/23');
---여기서 writer 넣을 때 이름 아니라 id넣어야 함,id를 참조하고 있기 때문에 
---강사페이지: 아이디만 있음, 이름 없음. (class_writer = member_id)
-
-select * from CLASS_BOARD;
-
 create SEQUENCE myclass_seq;
 
 create table myclass(
@@ -77,7 +72,6 @@ create table myclass(
 );
 
 create SEQUENCE media_seq;
-
 create table media(
     media_no int primary key,
     class_no int REFERENCES class_board(class_no),
@@ -85,6 +79,4 @@ create table media(
     media_path varchar2(2000) not null
 );
 
-insert into media
-values(1,0, '1','2');
 

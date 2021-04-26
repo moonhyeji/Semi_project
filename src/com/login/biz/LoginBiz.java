@@ -17,9 +17,6 @@ public class LoginBiz {
 		
 	}
 	
-	public LoginDto login(String member_id , String member_pw) {
-		return dao.login(member_id, member_pw);
-	}
 	
 	public int insert(LoginDto dto) {
 		return dao.insert(dto);
@@ -28,7 +25,6 @@ public class LoginBiz {
 	public String idCheck(String member_id) {
 		return dao.idCheck(member_id);
 	}
-	
 	public int update(LoginDto dto) {
 		return dao.update(dto);
 	}
@@ -44,6 +40,29 @@ public class LoginBiz {
 		return dao.findPw(map);
 	}
 	
+	public LoginDto login(Map map) {
+		return dao.login(map);
+	}
 	
+	public Integer loginCheck(Map map) {
+		return  dao.loginCheck(map);
+	}
+	public String selectCheck(String member_id) {
+		return dao.selectCheck(member_id);
+	}
+	
+	public LoginDto mypageView(String member_id) {
+		return dao.mypageView(member_id);
+	}
+	
+	//���� 
+	
+	public int memberdel(String member_id) {
+		return dao.memberdel(member_id);
+	}
+	
+	public int mypageupdate(Map map) {
+		return dao.mypageupdate(map);
+	}
 	
 }

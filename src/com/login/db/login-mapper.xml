@@ -29,15 +29,6 @@
 		ORDER BY MEMBER_NO DESC 
 	</select>
 	
-	<select id="login" parameterType="String" resultType="loginDto">
-		SELECT MEMBER_NO , MEMBER_ID , MEMBER_PW, MEMBER_NAME , MEMBER_BIRTH , MEMBER_ ADDRㅇ , MEMBER_PHONE
-			   MEMBER_EMAIL , MEMBER_GENDER , MEMBER_SELECT , MEMBER_ANSWER , MEMBER_DEL , MEMBER_REGDATE
-	    FROM MEMBER
-	    WHERE MEMBER_ID = #{member_id}
-	    AND MEMBER_PW = #{member_pw}
-	    AND MEMBER_SELECT = #{member_select}
-	</select>
-	
 	<insert id="insert" parameterType="loginDto">
 		INSERT INTO MEMBER
 		VALUES(MEMBER_SEQ.NEXTVAL,#{member_id},#{member_pw},#{member_name},#{member_birth},NULL,#{member_addr},#{member_phone},#{member_email},#{member_gender},#{member_select},#{member_question},#{member_answer},0,SYSDATE)
@@ -65,6 +56,46 @@
 		WHERE MEMBER_ID = #{member_id}
 	</delete>
 	
+	
+	<select id="login" parameterType="hashMap" resultType="loginDto">
+		SELECT *
+		FROM MEMBER
+	    WHERE MEMBER_ID = #{item1} AND MEMBER_PW = #{item2}
+	    
+	</select>
+	
+	
+	<select id="loginCheck" parameterType="hashMap" resultType="Integer">
+		SELECT COUNT(*)	   
+	    FROM MEMBER
+	    WHERE MEMBER_ID = #{item1} AND MEMBER_PW = #{item2}
+	    
+	</select>
+	
+	<select id="selectcheck" parameterType="String" resultType="String">
+		SELECT MEMBER_SELECT
+		FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<select id="mypageView" parameterType="String" resultMap="loginMap">
+		SELECT *
+	    FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<update id="mypageupdate" parameterType="hashMap">
+	 	UPDATE MEMBER 
+	    SET MEMBER_NAME = #{item2}, MEMBER_PHONE = #{item3}, MEMBER_ADDR= #{item4}
+	    WHERE MEMBER_ID = #{item1}
+	</update>
+	
+	<update id="memberdel" parameterType="String">
+	   UPDATE MEMBER
+	   SET MEMBER_DEL = '1'
+	   WHERE MEMBER_ID = #{member_id}
+	</update>
+
 
 </mapper>
   

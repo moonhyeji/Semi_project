@@ -20,24 +20,7 @@ public class LoginDao extends SqlMapConfig {
 		return list;
 	}
 	
-	public LoginDto login(String member_id , String member_pw) {
-		
-		SqlSession session = null;
-		LoginDto dto = null;
-		
-		try {
-			session = getSessionFactory().openSession();
-			dto = (LoginDto) session.selectMap(namespace+"login", member_id, member_pw);
-		} catch (Exception e) {
-		
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		
-		return dto;
-		
-	}
+	
 	public int insert(LoginDto dto) {
 		
 		int res = 0;
@@ -88,8 +71,6 @@ public class LoginDao extends SqlMapConfig {
 		
 		return findid;
 	}
-	
-	
 	public String findPw(Map map) {
 		SqlSession session = null;
 		String findpw = null;
@@ -112,6 +93,89 @@ public class LoginDao extends SqlMapConfig {
 		
 		return id;
 		
+	}
+	
+	public LoginDto login(Map map) {
+		
+		SqlSession session = null;
+		LoginDto login = null;
+		
+		session = getSessionFactory().openSession();
+		login = session.selectOne(namespace+"login",map);
+		
+		session.close();
+		return login;
+		
+	}
+	
+	public Integer loginCheck(Map map) { 
+		
+		SqlSession session = null;
+		Integer check = null;
+		
+		session = getSessionFactory().openSession();
+		check = session.selectOne(namespace+"loginCheck",map);
+		
+		session.close();
+		return check;
+	}
+	
+	
+	
+	public String selectCheck(String member_id) {
+		SqlSession session = null;
+		String id = null;
+		
+		session = getSessionFactory().openSession();
+		id = session.selectOne(namespace+"selectcheck",member_id);
+		session.close();
+		
+		return id;
+		
+	}
+	
+	public LoginDto mypageView(String member_id) {
+		SqlSession session = null;
+		LoginDto dto = null;
+		
+		session = getSessionFactory().openSession();
+		
+		dto = session.selectOne(namespace+"mypageView", member_id);
+		session.close();
+		
+		return dto;
+	}
+	
+	
+	//마이 페이지
+	
+	public int memberdel(String member_id) {
+		SqlSession session = null;
+		int res = 0;
+		
+		session = getSessionFactory().openSession();
+		res = session.update(namespace+"memberdel",member_id);
+		
+		session.commit();
+		
+		session.close();
+		
+		return res;
+	}
+	
+	public int mypageupdate(Map map) {
+		SqlSession session = null;
+		int res = 0;
+		System.out.println("11");
+		session = getSessionFactory().openSession();
+		res = session.update(namespace+"mypageupdate",map);
+		
+		System.out.println("22");
+		session.commit();
+		
+		session.close();
+		
+		return res;
 	}
 
 }

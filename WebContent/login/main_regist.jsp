@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%
+    pageEncoding="UTF-8"%>
+    <%
 request.setCharacterEncoding("UTF-8");
 %>
 <%
@@ -10,95 +10,136 @@ response.setContentType("texthtml; charset=UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+	<meta name="google-signin-client_id"
+	content="805502210933-uhd1c3d071j2sagpss5fbplkalageest.apps.googleusercontent.com">
 <title>Insert title here</title>
 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-	crossorigin="anonymous"></script>
-
-<style>
-.selector-for-some-widget {
-	box-sizing: content-box;
+<style type="text/css">
+body {
+    font-family: "Lato", sans-serif;
 }
 
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
 }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
+.sidenav {
+    height: 100%;
+    background-color: #777;
+    overflow-x: hidden;
+    padding-top: 20px;
 }
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+
+
 </style>
-
-
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id"
-	content="805502210933-uhd1c3d071j2sagpss5fbplkalageest.apps.googleusercontent.com">
-
-<link href="signin.css" rel="stylesheet">
-
 </head>
-<body class="text-center">
-	<main class="form-signin">
-		<form>
-			<img src="resources/image/main_Logo.png" alt=" 런웨이로고" width="300"
-				height="100">
-			<h1 class="h3 mb-3 fw-normal">로그인 해주세요</h1>
-
-
-
-			<div class="d-flex justify-content-center">
-				<div class="form-floating">
-					<input type="text" class="form-control" id="floatingInput"
-						name="member_id" placeholder="Id" required="required"> <label
-						for="floatingInput">아이디</label><br>
-				</div>
-				<br>
-			</div>
-
-			<div class="d-flex justify-content-center">
-				<div class="form-floating">
-					<input type="password" class="form-control" id="floatingPassword"
-						name="member_pw" placeholder="Passward" required="required">
-					<label for="floatingInput">비밀번호</label>
-				</div>
-			</div>
-
-			<br>
-		  <a href="findid.jsp">아이디찾기</a>
-		  &emsp;<a href='findpw.jsp'>비밀번호찾기</a>
-
-			<br>
-			<br>
-
-			<button class=" btn btn-lg btn-primary" onclick="">Login</button>
-			<!--submit????  -->
-			<button class="btn btn-lg btn-primary"
-				onclick="location.href='inmain_regist.jsp'">Join</button>
-			<button class="btn btn-lg btn-secondary"
-				onclick="location.href='index.jsp'">Back</button>
-		</form>
-	</main>
-
-	<br>
-	<br>
-
-
-	<!-- 구글 로그인  -->
-	<div align="center" class="g-signin2"
-		gapi.auth2.getAuthInstance()="onSignIn"></div>
+<body>
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>LearnWay<br></h2>
+            <p>Login from here to access.</p>
+         </div>
+      </div>
+      
+      <form action="logincheck.jsp" method="post">
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+              
+                  <div class="form-group">
+                     <label>ID</label>
+                     <input type="text" class="form-control" placeholder="ID" required="required" name="member_id">
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input type="password" class="form-control" placeholder="Password" required="required" name="member_pw">
+                  </div>
+                  <input type="submit" class="btn btn-black" value="login"/>
+                 
+               			<br>
+               			<br>
+               			
+               		<a href="findid.jsp" class="btn btn-secondary">find ID</a>
+               		<a href="findpw.jsp"  class="btn btn-secondary">find PW</a>
+               		
+               		
+               			<br>
+               			<br>
+               		
+               		<!-- 구글 로그인  -->
+	<div align="center" class="g-signin2" gapi.auth2.getAuthInstance()="onSignIn"></div>
 	<br>
 
 	<script>
@@ -112,10 +153,10 @@ response.setContentType("texthtml; charset=UTF-8");
 	</script>
 
 	<!--//로그아웃 -->
-	<!-- <a href="#" onclick="signOut();">Sign out</a>
-
+	<!-- <a href="#" onclick="signOut();">Sign out</a> 
+	
 <script>
-	//구글 로그아웃 스크립트
+	//구글 로그아웃 스크립트 
 	function signOut() {
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut().then(function() {
@@ -123,7 +164,7 @@ response.setContentType("texthtml; charset=UTF-8");
 		});
 	}
 </script>
-
+	
 	-->
 
 
@@ -146,22 +187,14 @@ response.setContentType("texthtml; charset=UTF-8");
 		naver_id_login.setPopup();
 		naver_id_login.init_naver_id_login();
 	</script>
-</html>
 <br>
 
 
 
 
 <!--  카카오톡 -->
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
-<title>Login Demo - Kakao JavaScript SDK</title>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-</head>
 
-<body>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<a id="kakao-login-btn"></a>
 	<a href="http://developers.kakao.com/logout"></a>
 	<script type='text/javascript'>
@@ -179,12 +212,10 @@ response.setContentType("texthtml; charset=UTF-8");
 			}
 		});
 	</script>
-</body>
 
 <br>
 <br>
 
-<body>
 	<!-- login btn -->
 	<div align="center" class="fb-login-button" data-max-rows="1"
 		data-size="large" data-button-type="continue_with"
@@ -204,4 +235,14 @@ response.setContentType("texthtml; charset=UTF-8");
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
+               
+             
+            </div>
+         </div>
+      </div>
+      </form>
+      
+      	
+
 </body>
+</html>

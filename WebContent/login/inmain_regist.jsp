@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@page import="java.util.List"%>
-<%request.setCharacterEncoding("UTF-8");%>
-<%response.setContentType("texthtml; charset=UTF-8");%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
+
+
+<title>Join LearnWay</title><script type="text/javascript">
 	function idCheckConfirm() {
 		var chk = document.getElementsByName("member_id")[0].title;
 		if (chk == "n") {
@@ -23,7 +20,7 @@
 			alert("id를 입력해주세요");
 		} else {
 			open("idcheck.jsp?id="+doc.value,
-					"", "width=250, height=20,location= no,toolbars= no,status= no");
+					"", "width=250, height=200,location= no,toolbars= no,status= no");
 		}
 	}
 	
@@ -95,104 +92,207 @@
 					}
 				}).open();
 	}
+	
+	
+	
+	
+	$
 </script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <style type="text/css">
-	.reg_button{
-		margin-top: 50px;
-	}
-	.reg_phone{
-		margin-top: 20px;
-	}
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #777;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+
 </style>
+
 </head>
 <body>
-	<h1>Register form</h1>
 
-	<form action="regires.jsp" method="POST">
-	
-		<div>
-			<fieldset class="field">
-				<label>강사 학생 선택</label><br> <label> 강사 </label><input
-					type="radio" name="member_select" value="1"> <label>
-					학생 </label><input type="radio" name="member_select" value="2">
-			</fieldset>
-		</div>
 
-		<!-- 아이디 -->
-		<div>
-			<label for="member_id">아이디</label><br> 
-			<input type="button" value="중복체크" onclick="idCheck();"> 
-			<input type="text" id="memeber_id" name="member_id" placeholder="Id" required="required">
-		</div>
-		
-		<!-- 비밀번호 -->
-		<div>
-			<label for="member_pw">비밀번호</label><br> <input type="password"
-				class="" id="member_pw" name="member_pw" placeholder="Passward"
-				required="required">
-
-		</div>
-
-		<!-- 이름 -->
-		<div>
-			<label for="member_name">이름</label><br> <input type="text"
-				class="" id="member_name" name="member_name" placeholder="Name" required="required">
-		</div>
-		
-		<!-- 성별 -->
-		<div>
-			<fieldset class="field">
-				<label for="member_name">성별</label><br> <label> 남 </label><input
-					type="radio" name="member_gender" value="M"> <label>
+<div class="sidenav">
+         <div class="login-main-text">
+             <h2>LearnWay<br></h2>
+            <p>Join from here to access.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form action="regires.jsp" method="post">
+               
+               		<!-- 강사 or 학생 -->
+                  <div class="form-group">
+                     <label> Teacher </label><input type="radio" name="member_select" value="1" checked="checked"> <label>
+					Student </label><input type="radio" name="member_select" value="2" >
+                  </div>
+                  
+                   <!-- 성별 -->
+                  
+                  <div class="form-group">
+                    <label for="member_gender"></label><br> <label> 남 </label><input
+					type="radio" name="member_gender" value="M" checked="checked" > <label>
 					여 </label><input type="radio" name="member_gender" value="F">
-			</fieldset>
-		</div>
-		
-		<!-- 생년월일 -->
-		<div>
-			<label for="member_birth">생년월일</label><br> <input type="text"
-				class="" id="member_birth" name="member_birth"
-				placeholder="ex) 19990415" required="required">
-
-		</div>
-		
-		<!--  질문 -->
-		<div>
-			<label>내 정보 찾기 질문</label> <br>
-			<select name="question">
+                  </div>
+                  
+                  <!-- 이름-->
+                  <div class="form-group">
+                     <label for="member_name">이름</label><br>
+                    <input type="text" id="memeber_name" name="member_name" placeholder="NAME" required="required">
+                  </div>
+                  
+                  <!-- ID -->
+                  <div class="form-group">
+                     <label for="member_id">ID</label><br>
+                    <input type="text" id="memeber_id" name="member_id" placeholder="Id" required="required">
+                    <input type="button" value="check" onclick="idCheck();"> 
+                  </div>
+                  
+                  
+                     
+                  <!-- PW -->
+                  <div class="form-group">
+                     <label for="member_pw">PASSWORD</label><br>
+                    <input type="password" id="memeber_pw" name="member_pw" placeholder="Password" required="required">
+                  </div>
+                  
+                  
+                  
+                  <!-- 생년월일-->
+                    <div class="form-group">
+                     <label for="member_birth">생년월일</label><br>
+                    <input type="text" id="memeber_birth" name="member_birth" placeholder="ex) 19990415" required="required">
+                  </div>
+                  
+                  <!-- 전화번호 -->
+                  <div class="form-group">
+                     <label for="member_phone">Phone</label><br>
+                    <input type="text" id="memeber_phone" name="member_phone" placeholder="ex)010-1234-5678" required="required">
+                  </div>
+                  
+                         
+                  <!-- Email-->
+                  <div class="form-group">
+                     <label for="member_email">Email</label><br>
+                     
+                     <input type="text" id="memeber_email" name="member_email" placeholder="LearnWay" required="required">
+                     
+                  </div>
+                  
+                  
+                  <!-- 질문 -->
+                  <div class="form-group">
+                     <label for="member_question">Question</label><br>
+                    <select name="question">
 				<option value="질문을 선택해 주세요">질문을 선택해 주세요</option>
 				<option value="기억의 남는 추억의 장소는?">기억의 남는 추억의 장소는?</option>
 				<option value="자신의 인생 좌우명">자신의 인생 좌우명</option>
 				<option value="가장 기억에 남는 선생님 성함은?">가장 기억에 남는 선생님 성함은?</option>
 				<option value="인상 깊게 읽은 책 이름은?">인상 깊게 읽은 책 이름은?</option>
-			</select> <br> <label>내정보 찾기 질문의 답 입력</label><br> 
+					</select> 
+					<br>
+			<label>Answer</label>
+					<br> 
 			<input type="text" name="answer">
-		</div>
-		
-		<!-- 이메일 -->
-		<div>
-			<label for="member_email">이메일</label><br> <input type="text"
-				class="" name="member_email" id="member_email" placeholder="E-amil"
-				required="required">
-		</div>
-		<!-- 휴대전화 -->
-		<div class="reg_phone">
-			<label for="member_phone">전화번호</label><br> <input type="text"
-				class="" id="member_phone" name="member_phone"
-				placeholder="ex) 010-1234-5601" required="required">
-		</div>
-		<br>
-		<div>
-			<input type="text" id="member_postcode" name="member_postcode" placeholder="우편번호">
-			<input type="button" onclick="member_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="member_address" name="member_address" placeholder="주소"><br>
-			<input type="text" id="member_detailAddress" name="member_detailAddress" placeholder="상세주소">
-			<input type="text" id="member_extraAddress" name="member_extraAddress" placeholder="참고항목">
-		</div>
-		<div class="reg_button">
-			<button>취소하기</button>
-			<input type="submit" value="가입하기">
-		</div>
-	</form>
+                 </div>
+                  
+                  <!-- 주소 -->
+					<div class="form-group">
+					<label>Address</label><br>
+						<input type="text" id="member_postcode" name="member_postcode"
+							placeholder="우편번호"> <input type="button"
+							onclick="member_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input style="width: 300px" type="text" id="member_address" name="member_address"
+							placeholder="주소"><br> <input type="text"
+							id="member_detailAddress" name="member_detailAddress"
+							placeholder="상세주소"> <input type="text"
+							id="member_extraAddress" name="member_extraAddress"
+							placeholder="참고항목">
+					</div>
+					
+					 <div class="form-group">
+			<input type="submit" class="btn btn-black" value="JOIN">
+                  </div>
+
+				</form>
+            </div>
+         </div>
+      </div>
+
 </body>
 </html>

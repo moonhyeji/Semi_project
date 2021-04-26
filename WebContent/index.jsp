@@ -1,192 +1,211 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("UTF-8");
+response.setContentType("texthtml; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LearnWay - ø¬°§ø¿«¡∂Û¿Œ¿∏∑Œ ¡Ò±‚¥¬ ¥ŸæÁ«— ≈¨∑°Ω∫</title>
-<!-- æ∆¿Ãƒ‹ √£æ∆º≠ ∫Ÿø©∫∏±‚ -->
+<title>LearnWay - Ïò®¬∑Ïò§ÌîÑÎùºÏù∏ÏúºÎ°ú Ï¶êÍ∏∞Îäî Îã§ÏñëÌïú ÌÅ¥ÎûòÏä§</title>
+<!-- ÏïÑÏù¥ÏΩò Ï∞æÏïÑÏÑú Î∂ôÏó¨Î≥¥Í∏∞ -->
+<%
+	String member_id = request.getParameter("id");
+	
+%>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+
+		if ($(".id").val() == "null") {
+			$(".log").html('<a class="log" href="login/main_regist.jsp"><i class="fas fa-sign-in-alt"></i>LOGIN</a>');
+			$('.mypage').html('<a href="#">ÎßàÏù¥ÌéòÏù¥ÏßÄ</a>')
+		} else {
+			$(".log").html('<a class="log" href="index.jsp"><i class="fas fa-sign-in-alt"></i>LOGOUT</a>');
+			$(".join").text("");
+			$('.mypage').html('<a class="mypage" href="mypage/mypageload.jsp?id=<%=member_id %>">ÎßàÏù¥ÌéòÏù¥ÏßÄ</a>')
+		}
+	});
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/9b7675f701.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
 <script type="text/javascript">
-
-
-
 </script>
+
 </head>
 <body>
 
 <header>
-	<!-- ∑Œ∞Ì -->
-	<ul class="header-list">
-		<li><div><img alt="∑Œ∞Ì" src="resources/image/main_Logo.png" width="170px" height="40px"/></div></li>
-		
-	<!-- ∞Àªˆ√¢ -->	
-		<li>
-		<div class="searchContainer">
-			<div class="search_Box">
-				<table class="search_Elements">
-					<tr>
-						<td>
-							<input type="text" placeholder="√£¿∏Ω√¥¬ ≈¨∑°Ω∫∞° ¿÷¿∏Ω≈∞°ø‰?" class="search">
-						</td>
-						<td>
-							<a href="#"><img src="resources/image/search_icon.png" style="float: right;"/></a>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		</li>
-			
+
+<input type="hidden" value="<%=member_id %>" class="id">
+
+   <!-- Î°úÍ≥† -->
+   <ul class="header-list">
+      <li><div><img alt="Î°úÍ≥†" src="resources/image/main_Logo.png" width="170px" height="40px"/></div></li>
+      
+   <!-- Í≤ÄÏÉâÏ∞Ω -->   
+      <li>
+      <div class="searchContainer" style="margin-left: 100px">
+         <div class="search_Box">
+            <table class="search_Elements">
+               <tr>
+                  <td>
+                     <input type="text" placeholder="Ï∞æÏúºÏãúÎäî ÌÅ¥ÎûòÏä§Í∞Ä ÏûàÏúºÏã†Í∞ÄÏöî?" class="search">
+                  </td>
+                  <td>
+                     <a href="#"><img src="resources/image/search_icon.png" style="float: right;"/></a>
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </div>
+      </li>
+         
  
-	<!-- ∏ﬁ¥∫ -->	
+   <!-- Î©îÎâ¥ -->   
 		<li>
-			<div>
-				<input type="checkbox" id="menuicon">
-				<label for="menuicon">
-					<span></span>
-					<span></span>
-					<span></span>
-				</label>
-				<div class="sidebar">
-					<ul class="sitemap-ul">
-						<li><a href="#"></a>
-							<ul id="submenu">
-								<li><a href="#">∞≠¿«</a></li>
-								<li><a href="#">∏∂¿Ã∆‰¿Ã¡ˆ</a></li>
-								<li><a href="#">¿Ã∫•∆Æ</a></li>
-								<li><a href="#">∞¯¡ˆªÁ«◊</a></li>
-								<li><a href="#">∞Ì∞¥ºæ≈Õ</a></li>
-								<li><a href="#">Ω«Ω√∞£ªÛ¥„</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>			
-			</div>
+			<div class="btn-group">
+			  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			    Menu
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li><a class="dropdown-item" href="#">Í∞ïÏùò</a></li>
+			    <li><a class="dropdown-item" href="#">Ïù¥Î≤§Ìä∏</a></li>
+			    <li><a class="dropdown-item" href="notice_board/noti_list.jsp?id=<%=member_id%>">Í≥µÏßÄÏÇ¨Ìï≠</a></li>
+			    <li><a class="dropdown-item" href="cs_board/cs_list.jsp?id=<%=member_id%>">Í≥†Í∞ùÏÑºÌÑ∞</a></li>
+			    <li><a class="dropdown-item" href="#">Ïã§ÏãúÍ∞ÑÏÉÅÎã¥</a></li>
+			    <li><hr class="dropdown-divider"></li>
+			    <li><a class="dropdown-item" href="mypage/mypageload.jsp?id=<%=member_id %>">ÎßàÏù¥ÌéòÏù¥ÏßÄ</a></li>
+			  </ul>
+			</div>				
 		</li>
-	
-		
-			<li>
-				<div class="login">
-	     			 <a href="login/main_regist.jsp"><i class="fas fa-sign-in-alt"></i>LOGIN</a>
-	   			</div>
-			</li>
-			
-			<li>   
-			   <div class="join">
-			      <a href="login/inmain_regist.jsp"><i class="fas fa-user-friends"></i> JOIN</a>
-			   </div>
-		   </li>
-					   
-		
-		 
-		</ul>
-	
+   
+      
+         <li>
+            <div class="login">
+                  <a class="log" href="login/main_regist.jsp"><i class="fas fa-sign-in-alt"></i>LOGIN</a>
+               </div>
+         </li>
+         
+         <li>   
+            <div class="join">
+               <a class="join" href="login/inmain_regist.jsp"><i class="fas fa-user-friends"></i>JOIN</a>
+            </div>
+         </li>
+                  
+      
+       
+      </ul>
+   
 
 
 </header>
 <main>
 
 <div class="section">
-	<input type="radio" name="slide" id="slide01" checked>
-	<input type="radio" name="slide" id="slide02">
-	<input type="radio" name="slide" id="slide03">
-	<div class="slidewrap">
-		
-		<ul class="slidelist">
-			<!-- ΩΩ∂Û¿ÃµÂ øµø™ -->
-			<li class="slideitem">
-				<a>
-					<div class="textbox">
-						<h3>ªı∑ŒøÓ √ÎπÃ √£±‚</h3>
-						<p>ø¬∂Û¿Œ¿∏∑Œ ∆Ì«œ∞‘ ¡Ò±‚ººø‰!</p>
-					</div> .............................................
-					<img src="resources/image/slide_camera.png">
-				</a>
-			</li>
-			<li class="slideitem">
-				<a>
-					
-					<div class="textbox">
-						<h3></h3>
-						<p></p>
-					</div>
-					<img src="resources/image/slide_painting.png">
-				</a>
-			</li>
-			<li class="slideitem">
-				<a>
-					
-					<div class="textbox">
-						<h3></h3>
-						<p></p>
-					</div>
-					<img src="resources/image/slide_yoga.png">
-				</a>
-			</li class="slideitem">
+   <input type="radio" name="slide" id="slide01" checked>
+   <input type="radio" name="slide" id="slide02">
+   <input type="radio" name="slide" id="slide03">
+   <div class="slidewrap">
+      
+      <ul class="slidelist">
+         <!-- Ïä¨ÎùºÏù¥Îìú ÏòÅÏó≠ -->
+         <li class="slideitem">
+            <a>
+               <div class="textbox">
+                  <h3>ÏÉàÎ°úÏö¥ Ï∑®ÎØ∏ Ï∞æÍ∏∞</h3>
+                  <p>Ïò®ÎùºÏù∏ÏúºÎ°ú Ìé∏ÌïòÍ≤å Ï¶êÍ∏∞ÏÑ∏Ïöî!</p>
+               </div> .............................................
+               <img src="resources/image/slide_camera.png">
+            </a>
+         </li>
+         <li class="slideitem">
+            <a>
+               
+               <div class="textbox">
+                  <h3></h3>
+                  <p></p>
+               </div>
+               <img src="resources/image/slide_painting.png">
+            </a>
+         </li>
+         <li class="slideitem">
+            <a>
+               
+               <div class="textbox">
+                  <h3></h3>
+                  <p></p>
+               </div>
+               <img src="resources/image/slide_yoga.png">
+            </a>
+         </li class="slideitem">
 
-			<!-- ¡¬,øÏ ΩΩ∂Û¿ÃµÂ πˆ∆∞ -->
-			<div class="slide-control">
-				<div>
-					<label for="slide03" class="left"></label>
-					<label for="slide02" class="right"></label>
-				</div>
-				<div>
-					<label for="slide01" class="left"></label>
-					<label for="slide03" class="right"></label>
-				</div>
-				<div>
-					<label for="slide02" class="left"></label>
-					<label for="slide01" class="right"></label>
-				</div>
-			</div>
+         <!-- Ï¢å,Ïö∞ Ïä¨ÎùºÏù¥Îìú Î≤ÑÌäº -->
+         <div class="slide-control">
+            <div>
+               <label for="slide03" class="left"></label>
+               <label for="slide02" class="right"></label>
+            </div>
+            <div>
+               <label for="slide01" class="left"></label>
+               <label for="slide03" class="right"></label>
+            </div>
+            <div>
+               <label for="slide02" class="left"></label>
+               <label for="slide01" class="right"></label>
+            </div>
+         </div>
 
-		</ul>
-		<!-- ∆‰¿Ã¬° -->
-		<ul class="slide-pagelist">
-			<li><label for="slide01"></label></li>
-			<li><label for="slide02"></label></li>
-			<li><label for="slide03"></label></li>
-		</ul>
-	</div>
+      </ul>
+      <!-- ÌéòÏù¥Ïßï -->
+      <ul class="slide-pagelist">
+         <li><label for="slide01"></label></li>
+         <li><label for="slide02"></label></li>
+         <li><label for="slide03"></label></li>
+      </ul>
+   </div>
 </div>
 
-	<div class="category">
-		<a href="#"><i class="fas fa-desktop"></i> IT</a>
-		<a href="#"><i class="fas fa-utensils"></i> Cooking</a>
-		<a href="#"><i class="fas fa-language"></i> Language</a>
-		<a href="#"><i class="fas fa-coins"></i> Stock</a>
-		<a href="#"><i class="fas fa-palette"></i> Art</a>
-		<a href="#"><i class="fas fa-running"></i> Sport</a>
-		<a href="#"><i class="fas fa-map-marked"></i> Around Teacher</a>
-	</div>
-	
-	<section>
-		<div class="sec_title">¿Œ±‚ CLASS</div>
-		≥ªøÎ
-	</section>
-	
-	<section>
-		<div class="sec_title">¡¯«‡¡ﬂ¿Œ EVENT</div>
-		≥ªøÎ
-	</section>
+   <div class="category">
+      <a href="#"><i class="fas fa-desktop"></i> IT</a>
+      <a href="#"><i class="fas fa-utensils"></i> Cooking</a>
+      <a href="#"><i class="fas fa-language"></i> Language</a>
+      <a href="#"><i class="fas fa-coins"></i> Stock</a>
+      <a href="#"><i class="fas fa-palette"></i> Art</a>
+      <a href="#"><i class="fas fa-running"></i> Sport</a>
+      <a href="#"><i class="fas fa-map-marked"></i> Around Teacher</a>
+   </div>
+   
+   <section>
+      <div class="sec_title">Ïù∏Í∏∞ CLASS</div>
+      ÎÇ¥Ïö©
+   </section>
+   
+   <section>
+      <div class="sec_title">ÏßÑÌñâÏ§ëÏù∏ EVENT</div>
+      ÎÇ¥Ïö©
+   </section>
 </main>
 
 <footer>
-	<div class="last">
-		<span class="footerLogo">
-			<h1>LearnWay</h1>
-		</span>
-		<div class="addrWrap">
-			<sub>
-				º≠øÔΩ√ ∞≠≥≤±∏ ≈◊«Ï∂ı∑Œ TEL:1234-5678, FAX:1234-5679,
-				<p class="copyright">Copyright(C) 2021 All Right Reserved.</p>
-			</sub>
-			<a href="#"><sub>¿ÃøÎæ‡∞¸</sub></a>
-			<a href="#"><sub>∞≥¿Œ¡§∫∏√≥∏ÆπÊƒß</sub></a>
-		</div>
-	</div>
+   <div class="last">
+      <span class="footerLogo">
+         <h1>LearnWay</h1>
+      </span>
+      <div class="addrWrap">
+         <sub>
+            ÏÑúÏö∏Ïãú Í∞ïÎÇ®Íµ¨ ÌÖåÌó§ÎûÄÎ°ú TEL:1234-5678, FAX:1234-5679,
+            <p class="copyright">Copyright(C) 2021 All Right Reserved.</p>
+         </sub>
+         <a href="#"><sub>Ïù¥Ïö©ÏïΩÍ¥Ä</sub></a>
+         <a href="#"><sub>Í∞úÏù∏Ï†ïÎ≥¥Ï≤òÎ¶¨Î∞©Ïπ®</sub></a>
+      </div>
+   </div>
 </footer>
 
 

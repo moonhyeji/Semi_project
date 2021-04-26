@@ -1,4 +1,4 @@
-<%@page import="com.mypage.biz.myPageBiz"%>
+<%@page import="com.login.biz.LoginBiz"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -16,8 +16,10 @@
 <%
 String member_id = request.getParameter("member_id");
 
-myPageBiz biz = new myPageBiz();
-int res = biz.deleteinfo(member_id);
+LoginBiz biz = new LoginBiz();
+int res = biz.memberdel(member_id);
+
+
 if(res > 0){
 
 
@@ -25,7 +27,7 @@ if(res > 0){
 
 <script type="text/javascript">
   alert("회원 정보 삭제 성공");
-  location.href="mylist.jsp";
+  location.href="../index.jsp";
 </script>
 
 
@@ -36,7 +38,7 @@ if(res > 0){
 
 <script type="text/javascript">
   alert("정보 삭제 실패 ");
-  location.href= "mypage.jsp?member_id=<%=member_id%>";
+  location.href="mypage_stu.jsp?member_id=<%=member_id%>";
 </script>
 
 <%

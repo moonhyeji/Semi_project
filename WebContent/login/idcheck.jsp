@@ -25,7 +25,8 @@
 	
 	if(id==null){	
 %>
-	<label>중복된 아이디가 아닙니다.</label>
+	<label style="font-size: 19px" >사용 가능한 ID 입니다.</label>
+	<br>
 	<input type="button" value="확인" onclick="window.close();">
 <%
 	}else{
