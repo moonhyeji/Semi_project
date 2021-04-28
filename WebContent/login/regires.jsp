@@ -71,41 +71,20 @@
 	if(res > 0){
 	
 %>
-	
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script type="text/javascript">
-		swal({
-			title: "LearnWay에 오신걸 환영합니다 ! ",
-			icon : "success"
-		}).then(function() {
-			   location.href="main_regist.jsp";	   
-		});
-		
-	   
 
+	<script type="text/javascript">
+	alert("회원가입 성공");
+	location.href="../index.jsp";
 	</script>
 	
 	<%
 	
-	
-	
-	
-	
 }else{
 	%>
 
-		
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
-		swal({
-			title: "회원가입을 다시 시도해주세요! ",
-			icon : "error"
-		}).then(function() {
-			   location.href="inmain_regist.jsp";	   
-		});
-		
-	   
-
+	   alert("회원가입 실패");
+	   location.href="inmain_regist.jsp";	   
 	</script>
 		<%
 	

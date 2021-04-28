@@ -46,6 +46,13 @@
   		FROM BOARD
   		WHERE BOARD_NO = #{item1}
   </delete>
+
+  <select id="searchList" parameterType="String" resultMap="NotiDto">
+    	SELECT *
+    	FROM BOARD
+    	WHERE BOARD_CATEGORY = '0' AND BOARD_TITLE LIKE #{text} || '%'
+    	ORDER BY BOARD_NO DESC
+  </select>
   
   
 </mapper>

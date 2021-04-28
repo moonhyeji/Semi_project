@@ -25,7 +25,7 @@
   
   <insert id="insert" parameterType="CsDto">
   		INSERT INTO BOARD
-  		VALUES(BOARD_SEQ.NEXTVAL, BOARDGROUP_SEQ.NEXTVAL, 0, 'admin', #{board_title}, #{board_content},1, SYSDATE)
+  		VALUES(BOARD_SEQ.NEXTVAL, BOARDGROUP_SEQ.NEXTVAL, 0, #{board_id}, #{board_title}, #{board_content},1, SYSDATE)
   	
   </insert>
   
@@ -60,5 +60,12 @@
 		(SELECT BOARD_GROUP+1 FROM BOARD WHERE BOARD_NO=#{boardgroup_no}), 
 		#{board_id}, #{board_title}, #{board_content}, 1, SYSDATE)
   </insert>
+
+  <select id="searchlist" parameterType="String" resultMap="CsDto">
+    	SELECT *
+    	FROM BOARD
+    	WHERE BOARD_CATEGORY = '1' AND BOARD_TITLE LIKE #{text} || '%'
+    	ORDER BY BOARD_NO DESC
+  </select>
   
 </mapper>

@@ -1,48 +1,105 @@
+<%@page import="com.login.biz.LoginBiz"%>
+<%@page import="com.login.dto.LoginDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 request.setCharacterEncoding("UTF-8");
 response.setContentType("texthtml; charset=UTF-8");
 %>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
-<title>학생 페이지</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<title>강사 페이지</title>
 <style type="text/css">
-	
-	body{
-		text-align: center;
-		width: 
-	}
-	img{
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #777;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+img{
 		width: 150px;
 		height: 150px;
 		margin-bottom: 20px;
 		margin-top:30px;
 		border: 1px solid black;
 	}
-	#div_01{
-		font-weight: bold;
-	}
-	#name{
-		width: 200px;
-		display: inline-block;
-		margin-bottom: 20px;
-	}
-	#phone{
-		width: 200px;
-		display: inline-block;
-		margin-bottom: 20px;
-	}
-	#member_addr{
-		width: 400px;
-		display: inline-block;
-		margin-bottom: 20px;
-	}
+
 
 </style>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	function member_execDaumPostcode() {
@@ -95,37 +152,56 @@ response.setContentType("texthtml; charset=UTF-8");
 				}).open();
 	}
 </script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
- 
 <%
 	String member_id = request.getParameter("member_id");
 	String member_name = request.getParameter("teacher_name");
 	String member_phone = request.getParameter("teacher_phone");
-	String member_email = request.getParameter("teacher_email");
+	String member_addr = request.getParameter("teacher_addr");
 %>
 
-	<form action="mypage_tch_updateres.jsp" method="post">
-	<input type="hidden" name="member_id" value="<%=member_id%>">
-		<h1><a href="../index.jsp">LearnWay</a></h1>
-		<h3>강사 마이페이지 수정</h3>
-		<div class="form-group">
-			<img class="tec_img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg"><br>
-		</div>
-		<div class="form-group" id="div_01">
-			<label for="name">이름</label><br>
-			<input type="text" class="form-control" id="name" name="member_name" value="<%=member_name%>"><br>
-			<label for="phone">핸드폰번호</label><br>
-			<input type="text" class="form-control" id="phone" name="member_phone" value="<%=member_phone%>"><br>
-			<label for="addr">주소</label><br>
-			<input type="text" class="form-control" id="member_addr" name="member_addr" value="<%=member_email%>">
-			<input type="button" class="btn-dark" onclick="member_execDaumPostcode()" value="우편번호 찾기"><br>
-			
-		</div>
-		<div class="form-group" style="margin-top: 20px;">
-			<input class="btn btn-dark" type="submit" value="수정 완료">&emsp;&emsp;&emsp;
-			<span><input class="btn btn-dark" type="button" value="수정 취소" onclick="location.href='index.jsp'"></span>
-		</div>
-	</form>
+
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>LearnWay</h2>
+         <h3>Teacher's MyPage</h3>
+         </div>
+      </div>
+      
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                  
+                  
+             <form action="mypage_tch_updateres.jsp" method="post">
+                  <input type="hidden" name="member_id" value="<%=member_id%>">
+                 <div class="form-group">
+	                <img class="tec_img" src="https://cdn.hellodd.com/news/photo/202005/71835_craw1.jpg"><br>
+					<input class="btn btn-dark btn-sm" type="submit" value="수정">
+                  </div>
+                  
+                  <div class="form-group">
+	                <label for="name">NAME</label><br>
+					<input type="text" class="form-control" id="name" name="member_name" value="<%=member_name%>"><br>
+					<label for="phone">PHONE</label><br>
+					<input type="text" class="form-control" id="phone" name="member_phone" value="<%=member_phone%>"><br>
+					<label for="addr">ADDR</label><br>
+					<input type="text" class="form-control" id="member_addr" name="member_addr" value="<%=member_addr%>">
+					<input type="button" class="btn-dark" onclick="member_execDaumPostcode()" value="find"><br>
+                  </div>
+                  
+                   <div class="form-group">
+		                 <input class="btn btn-dark" type="submit" value="수정 완료">&emsp;&emsp;
+						<span><input class="btn btn-dark" type="button" value="수정 취소" onclick="location.href='index.jsp'"></span>
+                   </div>
+               </form>
+               
+            </div>
+         </div>
+      </div>
 </body>
 </html>

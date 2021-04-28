@@ -55,7 +55,7 @@ public class LoginBiz {
 		return dao.mypageView(member_id);
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ 
+	//¸¶ÀÌ ÆäÀÌÁö
 	
 	public int memberdel(String member_id) {
 		return dao.memberdel(member_id);

@@ -37,7 +37,9 @@ public class CsBiz {
 	public int answerInsert(CsDto dto) {
 		return dao.answerInsert(dto);
 	}
-	
+	public List<CsDto> searchList(String text){
+		return dao.searchList(text);
+	}
 	
 
 }

@@ -21,6 +21,10 @@ String member_name = request.getParameter("member_name");
 String member_phone = request.getParameter("member_phone");
 String member_addr = request.getParameter("member_addr");
 
+System.out.println(member_id);
+System.out.println(member_name);
+System.out.println(member_phone);
+System.out.println(member_addr);
 
 Map map = new HashMap();
 map.put("item1",member_id);
@@ -40,7 +44,7 @@ if(res > 0){
 
   <script type="text/javascript">
   	 alert("정보 수정 성공");
-	 location.href="mypage_stu.jsp?id=<%=member_id %>";
+	 location.href="mypage_tch.jsp?id=<%=member_id %>";
   </script>     
 
 
@@ -50,7 +54,7 @@ if(res > 0){
 
   <script type="text/javascript">
   	alert("정보 수정 실패");
-  	location.href="mypage_info_update.jsp?_id=<%=member_id%>";
+  	location.href="mypage_info_update_tch.jsp?member_id=<%=member_id%>";
   </script>
   
 <%

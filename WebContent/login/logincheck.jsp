@@ -45,7 +45,7 @@ response.setContentType("texthtml; charset=UTF-8");
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    <script type="text/javascript">
    swal({
-         title: "<%=member_id%>님 환영합니다.",
+         title: "<%=member_id%>님 환영합니다.♥",
          icon: "success" //"info,success,warning,error" 중 택1
       }).then(function() {
          location.href = "../index.jsp?id=<%=member_id%>";

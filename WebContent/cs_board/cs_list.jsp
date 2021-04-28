@@ -13,10 +13,21 @@
 <body>
 
 <% 
+	String id = request.getParameter("id");
+	String text = request.getParameter("cs_search");
+	System.out.println(text);
+	System.out.println(id);
 	CsBiz biz = new CsBiz();
-	List<CsDto> list = biz.selectList();
+	List<CsDto> list = null;
+	
+	if(text==null){
+		list = biz.selectList();
+	}else{
+		list = biz.searchList(text);
+	}
 %>
-
+<form action="cs_list.jsp" method="post">
+<input type = "hidden" name="id" value="<%=id%>">
 	<h1> 고객상담 </h1>
 
 	<table border="1">
@@ -38,7 +49,7 @@
 	<tr>
 		<td><%=dto.getBoard_no() %></td>
 		<td><%=dto.getBoard_id() %></td>
-		<td><a href="csselect.jsp?board_no=<%=dto.getBoard_no()%>"><%=dto.getBoard_title() %></a></td> 
+		<td><a href="csselect.jsp?board_no=<%=dto.getBoard_no()%>&id=<%=id%>"><%=dto.getBoard_title() %></a></td> 
 		<td><%=dto.getBoard_date() %></td>
 	</tr>
 	
@@ -48,10 +59,15 @@
 
 	<tr>
       <td colspan="4" align="right">
-         <input type="button" value="글작성" onclick="location.href='csinsert.jsp'" />
+         <input type="button" value="글작성" onclick="location.href='csinsert.jsp?id=<%=id %>'" />
 		</td>
 	</tr>
+			<tr>
+			<td colspan="4" align="right">
+			<input type="text" name="cs_search" value="">
+			<input type="submit" value="검색"></td>
+		</tr>
 	</table>			
-
+</form>
 </body>
 </html>

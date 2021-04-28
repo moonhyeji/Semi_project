@@ -10,7 +10,7 @@
 <title>SmartEditor</title>
 
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
-<script type="text/javascript" src="/LearnWay_noti/se2/smarteditor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/LearnWay_1week/se2/smarteditor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
@@ -20,7 +20,7 @@ $(function(){
           oAppRef: oEditors,
           elPlaceHolder: "ir1", //textarea에서 지정한 id와 일치해야 합니다. 
           //SmartEditor2Skin.html 파일이 존재하는 경로
-          sSkinURI: "/LearnWay_noti/se2/smarteditor2/SmartEditor2Skin.html",  
+          sSkinURI: "/LearnWay_1week/se2/smarteditor2/SmartEditor2Skin.html",  
           htParams : {
               // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
               bUseToolbar : true,             
@@ -52,11 +52,14 @@ $(function(){
  
 </head>
 <body>
+<%
+	String id = request.getParameter("id");
+%>
 <form id="frm" action="noti_insertres.jsp" method="post" >
 <table width="100%">
         <tr>
             <td>작성자</td>
-            <td><input type="text" id="id" name="board_id" style="width:650px"/></td>
+            <td><input type="text" id="id" name="board_id" value="<%=id %>" style="width:650px"/></td>
         </tr>
         <tr>
             <td>제목</td>

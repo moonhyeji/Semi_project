@@ -33,37 +33,19 @@
 		
 	if(findid==null ){	
 %>
-	 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 	<script type="text/javascript">
-		swal({
-			title : "아이디 찾기 실패",
-			icon : "error"
-		}).then(function() {
-			location.href="findid.jsp";
-		});
-	
-	 
-		
+	 	alert("아이디 찾기 실패");
+		location.href="findid.jsp";
 	</script>
 	
-
 <%
 	}else{
 %>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
-		swal({
-			title: "ID",
-			text : "<%=findid%>",
-			icon : "info"
-		}).then(function() {
-			   location.href="main_regist.jsp";	   
-		});
-		
-	   
-
+	   alert("회원님의 아이디는 <%=findid%> 입니다.");
+	   location.href="main_regist.jsp";	   
 	</script>
-	
 <%
 	}
 %>

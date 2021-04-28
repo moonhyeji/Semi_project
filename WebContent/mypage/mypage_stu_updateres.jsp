@@ -1,5 +1,3 @@
-
-<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.login.biz.LoginBiz"%>
@@ -17,21 +15,21 @@
 <body>
 
 <%
-
 String member_id = request.getParameter("member_id");
 String member_name = request.getParameter("member_name");
 String member_phone = request.getParameter("member_phone");
 String member_addr = request.getParameter("member_addr");
 
-
-System.out.println(member_id + member_name + member_phone + member_addr);
+System.out.println(member_id);
+System.out.println(member_name);
+System.out.println(member_phone);
+System.out.println(member_addr);
 
 Map map = new HashMap();
+map.put("item1",member_id);
 map.put("item2",member_name);
 map.put("item3",member_phone);
 map.put("item4",member_addr);
-map.put("item1",member_id);
-
 
 LoginBiz biz = new LoginBiz();
 
@@ -52,7 +50,7 @@ if(res > 0){
 
   <script type="text/javascript">
   alert("정보 수정 실패");
-  location.href="mypage_info_update.jsp?id=<%=member_id%>";
+  location.href="mypage_info_update_stu.jsp?member_id=<%=member_id%>";
   </script>
   
 <%

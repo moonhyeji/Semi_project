@@ -33,7 +33,7 @@
 	
 	<script type="text/javascript">
 		alert("글 작성 성공");
-		location.href="noti_list.jsp";		
+		location.href="noti_list.jsp?id=<%=board_id%>";		
 	</script>
 <%
 	} else {
@@ -41,7 +41,7 @@
 
 	<script type="text/javascript">
 		alert("글 작성 실패");
-		location.href="noti_insert.jsp";		
+		location.href="noti_insert.jsp?id=<%=board_id%>";		
 	</script>
 
 <%

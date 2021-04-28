@@ -166,11 +166,10 @@ public class LoginDao extends SqlMapConfig {
 	public int mypageupdate(Map map) {
 		SqlSession session = null;
 		int res = 0;
-		System.out.println("11");
+		
 		session = getSessionFactory().openSession();
 		res = session.update(namespace+"mypageupdate",map);
 		
-		System.out.println("22");
 		session.commit();
 		
 		session.close();

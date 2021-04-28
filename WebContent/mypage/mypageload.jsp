@@ -26,7 +26,7 @@ response.setContentType("texthtml; charset=UTF-8");
 		
 %>
 	<script type="text/javascript">
-			location.href="mypage_tec.jsp?id=<%=member_id%>";
+			location.href="mypage_tch.jsp?id=<%=member_id%>";
 	</script>
 
 <%

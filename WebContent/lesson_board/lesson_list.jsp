@@ -1,3 +1,5 @@
+<%@page import="com.login.biz.LoginBiz"%>
+<%@page import="com.login.dto.LoginDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -92,7 +94,14 @@ header{
 
 </head>
 <body>
+<%
+	String member_id = request.getParameter("id");
 
+	LoginDto dto = new LoginDto();
+	LoginBiz biz = new LoginBiz();
+
+	dto = biz.mypageView(member_id);
+%>
 <header>
 	
 			<!-- 로고 -->
@@ -183,7 +192,7 @@ header{
 		              <h5 class="card-title">강의 제목</h5>
 		              <p class="card-text">강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용강의내용</p>
 		              <p class="card-price"><b>월 59,900원(5개월)</b></p>
-		              <div class="card-button"><a href="#" class="btn btn-outline-dark w-100">수강하기</a></div>
+		              <div class="card-button"><a href="lessonselectone.jsp?id=<%=member_id %>" class="btn btn-outline-dark w-100">수강하기</a></div>
 		            </div>
 		            
 		          </div>

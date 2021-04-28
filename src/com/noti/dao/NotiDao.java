@@ -73,5 +73,14 @@ public class NotiDao extends SqlMapConfig {
 
 		return res;
 	}
+	
+	public List<NotiDto> searchList(String text) {
+
+		SqlSession session = getSqlSessionFactory().openSession();
+		List<NotiDto> list = session.selectList(namespace + "searchList",text);
+		session.close();
+
+		return list;
+	}
 
 }

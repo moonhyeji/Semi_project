@@ -52,8 +52,7 @@
 	</select>
 	
 	<delete id="delete" parameterType="loginDto">
-		DELETE FROM MEMBER
-		WHERE MEMBER_ID = #{member_id}
+		
 	</delete>
 	
 	
@@ -86,7 +85,7 @@
 	
 	<update id="mypageupdate" parameterType="hashMap">
 	 	UPDATE MEMBER 
-	    SET MEMBER_NAME = #{item2}, MEMBER_PHONE = #{item3}, MEMBER_ADDR= #{item4}
+	    SET MEMBER_NAME = #{item2},MEMBER_PHONE = #{item3},MEMBER_ADDR= #{item4}
 	    WHERE MEMBER_ID = #{item1}
 	</update>
 	

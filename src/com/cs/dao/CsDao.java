@@ -110,15 +110,22 @@ public class CsDao extends SqlMapConfig{
 		map.put("board_content", dto.getBoard_content());
 		
 		int res = 0;
-		System.out.println("insert 도착");
 		try (SqlSession session = getSqlSessionFactory().openSession(true)) {
 			res = session.insert(namespace + "answerinsert", map);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("insert 탈출");
 		return res;
+	}
+	
+	public List<CsDto> searchList(String text){
+		
+		SqlSession session = getSqlSessionFactory().openSession();
+		List<CsDto> list = session.selectList(namespace + "searchlist",text);
+		session.close();
+		
+		return list;
 	}
 	
 

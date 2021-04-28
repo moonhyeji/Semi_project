@@ -27,7 +27,7 @@ if(res > 0){
 
 <script type="text/javascript">
   alert("회원 정보 삭제 성공");
-  location.href="../index.jsp";
+  location.href="mylist.jsp";
 </script>
 
 
@@ -38,7 +38,7 @@ if(res > 0){
 
 <script type="text/javascript">
   alert("정보 삭제 실패 ");
-  location.href="mypage_stu.jsp?member_id=<%=member_id%>";
+  location.href= "mypage.jsp?member_id=<%=member_id%>";
 </script>
 
 <%

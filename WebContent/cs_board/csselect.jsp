@@ -1,5 +1,6 @@
 
 
+<%@page import="com.login.biz.LoginBiz"%>
 <%@page import="com.cs.dto.CsDto"%>
 <%@page import="com.cs.biz.CsBiz"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,15 +17,37 @@
 <%
 	
 	int board_no = Integer.parseInt(request.getParameter("board_no"));
-
-
-	
+	String id = request.getParameter("id");
+	System.out.println(id);
 	CsBiz biz = new CsBiz();
 	CsDto dto = biz.selectOne(board_no);
-	
-
+	LoginBiz logbiz = new LoginBiz();
+	String select = logbiz.selectCheck(id);
+	System.out.println(select);
 %>
+<script type="text/javascript">
+	var select = <%=select%>;
+	var board_id = <%=dto.getBoard_id()%>;
+	var my_id = <%=id%>;
+	
+	function select_insert() {
+		if(select == "0"){
+			location.href = 'csinsert.jsp?id=<%=id%>';
+		}else{
+			alert("관리자가 아닙니다.");
+		}
+		
+	}
+	
+	function my_check() {
+		if(board_id.equals(my_id)){
+			location.href='csupdate.jsp?board_no=<%=dto.getBoard_no()%>';
+		}else{
+			alert("본인이 아닙니다.");
+		}
+	}
 
+</script>
 
 	<h1>DETAIL</h1>
 	<form action="cs_answerform.jsp" method="post">
@@ -44,11 +67,10 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
-				<input type="button" value="수정" onclick="location.href='csupdate.jsp?board_no=<%=dto.getBoard_no()%>'"/>
-				
+				<input type="button" value="수정" onclick="my_check();"/>
 				<input type="button" value="삭제" onclick="location.href='csdelete.jsp?board_no=<%=dto.getBoard_no()%>'"/>
-				<input type="submit" value="답변">
-				<input type="button" value="목록" onclick=""/>
+				<input type="button" value="답변" onclick="select_insert();">
+				<input type="button" value="목록" onclick="location.href='cs_list.jsp?id=<%=id%>"/>
 			</td>
 		</tr>		
 	</table>

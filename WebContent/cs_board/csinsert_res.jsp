@@ -21,6 +21,7 @@
 	System.out.println(board_content);
 	CsDto dto = new CsDto();
 	
+	dto.setBoard_id(board_id);
 	dto.setBoard_title(board_title);
 	dto.setBoard_content(board_content);
 	
@@ -33,7 +34,7 @@
 	
 	<script type="text/javascript">
 		alert("글 작성 성공");
-		location.href="cs_list.jsp";		
+		location.href="cs_list.jsp?id=<%=board_id%>";		
 	</script>
 <%
 	} else {
@@ -41,7 +42,7 @@
 
 	<script type="text/javascript">
 		alert("글 작성 실패");
-		location.href="csinsert.jsp";		
+		location.href="csinsert.jsp?id=<%=board_id%>";		
 	</script>
 
 <%

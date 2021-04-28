@@ -28,4 +28,8 @@ public class NotiBiz {
 	public int delete(int board_no) {
 		return dao.delete(board_no);
 	}
+	public List<NotiDto> searchList(String text) {
+		return dao.searchList(text);
+	}
+	
 }
