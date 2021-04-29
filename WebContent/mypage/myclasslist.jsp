@@ -28,6 +28,7 @@
   List<LessonDto> list = biz.select_tchlist(member_id);
 %>
 
+
 <!--  강사 마이페이지 -> 내 강의 목-->
 <h1>내 강의 목록 (강사용 페이지)</h1>
  <table border ="1">
@@ -45,11 +46,9 @@
 <%
   for(LessonDto dto : list){
 %>      
-
-
     <tr>
        <td><%= dto.getClass_no() %></td>
-       <td><a href="myclassupdate.jsp?no=<%=dto.getClass_no()%>"><%=dto.getClass_title()%></a></td>
+       <td><a href="myclass_selectone.jsp?no=<%=dto.getClass_no()%>"><%=dto.getClass_title()%></a></td>
        <td><%= date.format(dto.getClass_startdate()) %></td>
        <td><%= dto.getClass_lastdate() %></td>
     </tr>  
@@ -57,10 +56,9 @@
 <% 
     }
 %>
-
       <tr>
 	     <td colspan="4" align="right">
-	        <input type="button" value="강의등록" onclick="location.href='myclassinsert.jsp?class_writer=<%=member_id %>'">
+	        <input type="button" value="강의등록" onclick="location.href='myclassinsert_css.jsp?class_writer=<%=member_id %>'">
 	        <input type="button" value="뒤로가기" onclick="location.href='mypage_tch.jsp'">
 	      </td>
 	      

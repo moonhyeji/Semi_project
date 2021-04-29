@@ -25,21 +25,34 @@
   Date class_startdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_startdate"));
   Date class_lastdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_lastdate"));
      
-          System.out.println(request.getParameter("class_price"));
+               System.out.println(request.getParameter("class_price"));
   int class_price = Integer.parseInt(request.getParameter("class_price"));
   int class_count = Integer.parseInt(request.getParameter("class_count"));
-                   
+  
+  String class_title = request.getParameter("class_title");
+  String class_content = request.getParameter("class_content");
                 System.out.println(class_tag );
                 System.out.println(class_startdate);
   
-  Date class_eventstartdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_eventstartdate"));
-  Date class_eventlastdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_eventlastdate"));
-  int class_eventprice = Integer.parseInt(request.getParameter("class_eventprice"));
-  String class_title = request.getParameter("class_title");
-  String class_content = request.getParameter("class_content");
   int eventcheck =  Integer.parseInt(request.getParameter("eventcheck"));
+ 
+  
+  System.out.println(eventcheck);
   
   
+  
+  
+      Date  class_eventstartdate = new SimpleDateFormat("yyyy-mm-dd").parse("0000-00-00");
+	  Date class_eventlastdate = new SimpleDateFormat("yyyy-mm-dd").parse("0000-00-00");
+	  int class_eventprice = 0;
+		   	
+      if(eventcheck == 1 ){
+    //if 문 안에서 선언된 변수들은 if문 안에서만 사용이 가능하다. 따라서, if문 안의 변수를 밖에서 사용하려면, if문 위에서 미리 변수를 선언하면 된다. 	  
+	      class_eventstartdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_eventstartdate"));
+	      class_eventlastdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_eventlastdate"));
+	      class_eventprice = Integer.parseInt(request.getParameter("class_eventprice"));
+		   	  
+     }
   
   //---------------------------
   
@@ -50,9 +63,9 @@
    dto.setClass_lastdate(class_lastdate);
    dto.setClass_price(class_price);
    dto.setClass_count(class_count);
+  
    
    dto.setClass_eventcheck(eventcheck);
-   
    dto.setClass_eventstartdate(class_eventstartdate);
    dto.setClass_eventlastdate(class_eventlastdate);
    dto.setClass_eventprice(class_eventprice);
@@ -60,8 +73,6 @@
    dto.setClass_title(class_title);
    dto.setClass_content(class_content);
    
-  
-  
   LessonBiz biz = new LessonBiz();
   int res = biz.insert(dto);
   if(res > 0){

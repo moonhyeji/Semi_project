@@ -20,14 +20,14 @@
          <result property="class_eventlastdate" column="CLASS_EVENTLASTDATE"/>
 	</resultMap>
 	
-	    <select id="selectList"                     resultMap="LessonMap"> <!--  강의에 대한 모든 리스트 --> <!-- 결과값의 형태  -->
+	    <select id="selectList"   resultMap="LessonMap"> <!--  강의에 대한 모든 리스트 --> <!-- 결과값의 형태  -->
 			  SELECT CLASS_NO, CLASS_TITLE, CLASS_WRITER, CLASS_CONTENT, CLASS_PRICE, CLASS_STARTDATE, CLASS_LASTDATE
 		      FROM CLASS_BOARD
 		      ORDER BY CLASS_NO DESC
 		</select>
 		
 		<!-- select했을 때 강의 전체내용 / 강의 상페이지 하나만 -->         <!--  selectone 에서    resultMap = "LessonMap" 를 resultType = "LessonDto"로 대체가능.  -->
-		<select id="selectOne" parameterType="int"       resultMap = "LessonMap">  
+		<select id="selectOne" parameterType="int"  resultMap = "LessonMap">  
 		  SELECT CLASS_TAG, CLASS_TITLE, CLASS_WRITER, CLASS_CONTENT, CLASS_PRICE, CLASS_COUNT, CLASS_STARTDATE,CLASS_LASTDATE,
 		  CLASS_EVENTCHECK, CLASS_EVENTPRICE, CLASS_EVENTSTARTDATE, CLASS_EVENTLASTDATE
 		  FROM CLASS_BOARD
@@ -63,7 +63,6 @@
 	    
 	    
 		<delete id="delete" parameterType="LessonDto">
-	     
 		</delete>
   
   </mapper>

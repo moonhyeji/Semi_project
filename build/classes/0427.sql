@@ -10,10 +10,10 @@ create table member(
     member_phone VARCHAR2(20) not null,
     member_email VARCHAR2(50) not null,
     member_gender varchar2(2) check(member_gender in ('F','M')),
-    member_select int check(member_select in(0,1,2)), --°ü¸®ÀÚ 0 ,°­»ç 1 , ÇÐ»ý 2
+    member_select int check(member_select in(0,1,2)), --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0 ,ï¿½ï¿½ï¿½ï¿½ 1 , ï¿½Ð»ï¿½ 2
     member_question varchar2(100) not null,
     member_answer varchar2(100) not null,
-    member_del int check(member_del in(0,1)), --°¡ÀÔÁß 0 , Å»Åð 1
+    member_del int check(member_del in(0,1)), --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0 , Å»ï¿½ï¿½ 1
     member_regdate date not null
 );
 -------------------------------------------------------------
@@ -30,12 +30,14 @@ create table class_board(
     class_count int default 0 not null ,
     class_startdate date not null,
     class_lastdate date not null,
-    class_eventcheck int check(class_eventcheck in(0,1)),--0:ÀÌº¥Æ®Áß ¾Æ´Ô 1:ÀÌº¥Æ®ÁøÇàÁß
+    class_eventcheck int check(class_eventcheck in(0,1)),--0:ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½Æ´ï¿½ 1:ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     class_eventprice int default 0 not null,
     class_eventstartdate date not null,
     class_eventlastdate date not null
 );
 
+
+select * from class_board;
 ----------------------------------------------------------------
 
 create SEQUENCE myclass_seq;
@@ -59,7 +61,7 @@ create table media(
     media_path varchar2(2000) not null
 );
 
-------------------- °øÁö»çÇ×, °í°´Áö¿ø °Ô½ÃÆÇ-----------------
+------------------- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½-----------------
 
 create SEQUENCE board_seq;
 create SEQUENCE boardgroup_seq;
@@ -70,7 +72,7 @@ create table board(
     board_id varchar2(20) not null,
     board_title varchar2(20) not null,
     board_content varchar2(2000) not null,
-    board_category int check(board_category in(0,1)), -- 0Àº °øÁö»çÇ× 1Àº °í°´Áö¿ø
+    board_category int check(board_category in(0,1)), -- 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     board_date date not null
     );
 

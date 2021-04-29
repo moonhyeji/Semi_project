@@ -10,7 +10,7 @@ import oracle.sql.DATE;
 public class LessonDao extends SqlMapConfig{
 
 	private String namespace = "com.lesson.mapper.";
-	
+
 	
 	public List<LessonDto> selectList(){
 		SqlSession session = getSessionFactory().openSession();
@@ -34,7 +34,7 @@ public class LessonDao extends SqlMapConfig{
 	public LessonDto selectOne(int no) {
 		SqlSession session = null;
 		LessonDto dto = null;
-		try { 
+		try {
 			session = getSessionFactory().openSession();
 			dto = session.selectOne(namespace+"selectOne", no);
 			
@@ -68,18 +68,19 @@ public class LessonDao extends SqlMapConfig{
 		
 		
 		
-		
 		int res = 0;
+
 		try(SqlSession session = getSessionFactory().openSession(true)){
+
 			res = session.insert(namespace+"insert",dto);	
-			
 		}	
 		return res;
 	}
 	
 	//update
 	public int update(LessonDto dto) {
-		int res =0;
+		int res = 0;
+
 		try(SqlSession session = getSessionFactory().openSession(true)){
 			res = session.update(namespace+"update",dto);	
 		}	
@@ -96,5 +97,4 @@ public class LessonDao extends SqlMapConfig{
 		}
 		return res;
 	}
-	
 }

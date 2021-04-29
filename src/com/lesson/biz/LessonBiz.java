@@ -23,13 +23,9 @@ public class LessonBiz {
 	}
 	
 	public int insert(LessonDto dto) {
-		
-		System.out.println("1");
 		if(dto.getClass_eventprice() < 0 ){
 			dto.setClass_eventprice(0);
 		}
-		System.out.println("2");
-
 		return dao.insert(dto);
 
 	}
