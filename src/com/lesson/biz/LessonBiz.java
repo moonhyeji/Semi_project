@@ -14,19 +14,30 @@ public class LessonBiz {
 		return dao.selectList();	
 	}
 	
+	
+	
+	
    public List<LessonDto> select_tchlist(String class_writer){
+	   
 	   return dao.select_tchlist(class_writer);
    }
+   
+   
+   
 
-	public LessonDto selectOne(int class_no) {
-		return dao.selectOne(class_no);
+	public LessonDto selectOne(int class_no) {		
+		return dao.selectOne(class_no);			
 	}
+	
+	
+	
 	
 	public int insert(LessonDto dto) {
 		if(dto.getClass_eventprice() < 0 ){
 			dto.setClass_eventprice(0);
 		}
 		return dao.insert(dto);
+		
 
 	}
 	

@@ -10,13 +10,20 @@ create table member(
     member_phone VARCHAR2(20) not null,
     member_email VARCHAR2(50) not null,
     member_gender varchar2(2) check(member_gender in ('F','M')),
-    member_select int check(member_select in(0,1,2)), --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0 ,ï¿½ï¿½ï¿½ï¿½ 1 , ï¿½Ð»ï¿½ 2
+    member_select int check(member_select in(0,1,2)), --°ü¸®ÀÚ 0 ,°­»ç 1 , ÇÐ»ý 2
     member_question varchar2(100) not null,
     member_answer varchar2(100) not null,
-    member_del int check(member_del in(0,1)), --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0 , Å»ï¿½ï¿½ 1
+    member_del int check(member_del in(0,1)), --°¡ÀÔÁß 0 , Å»Åð 1
     member_regdate date not null
 );
+select * from member; where member_select = 2;
+insert into member
+values(member_seq.nextval, 'admin', 'admin1234', '°ü¸®ÀÚ', '20210420',null,'khÁ¤º¸±³À°¿ø','010-0000-0000', 'admin@kh.com', 'F', 0, '°ü¸®ÀÚ´Ï?', '³×',0, sysdate );
 -------------------------------------------------------------
+drop table class_board;
+drop SEQUENCE classboard_seq;
+
+delete from class_board where class_no = 24;
 
 create SEQUENCE classboard_seq;
 create table class_board(
@@ -30,14 +37,12 @@ create table class_board(
     class_count int default 0 not null ,
     class_startdate date not null,
     class_lastdate date not null,
-    class_eventcheck int check(class_eventcheck in(0,1)),--0:ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½Æ´ï¿½ 1:ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    class_eventcheck int check(class_eventcheck in(0,1)),--0:ÀÌº¥Æ®Áß ¾Æ´Ô 1:ÀÌº¥Æ®ÁøÇàÁß
     class_eventprice int default 0 not null,
-    class_eventstartdate date not null,
-    class_eventlastdate date not null
+    class_eventstartdate date,
+    class_eventlastdate date
 );
 
-
-select * from class_board;
 ----------------------------------------------------------------
 
 create SEQUENCE myclass_seq;
@@ -52,16 +57,23 @@ create table myclass(
 );
 
 ----------------------------------------------------------------
+drop SEQUENCE media_seq;
+drop table media;
 
+select * from media;
 create SEQUENCE media_seq;
 create table media(
     media_no int primary key,
-    class_no int not null,
-    media_extension varchar2(10) not null,
+    class_title varchar2(100) not null,
+    media_extension varchar2(100) check(media_extension in('photo','video')),
     media_path varchar2(2000) not null
 );
 
-------------------- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½-----------------
+------------------- °øÁö»çÇ×, °í°´Áö¿ø °Ô½ÃÆÇ-----------------
+drop SEQUENCE board_seq;
+drop SEQUENCE boardgroup_seq;
+drop table board;
+
 
 create SEQUENCE board_seq;
 create SEQUENCE boardgroup_seq;
@@ -70,9 +82,9 @@ create table board(
     board_group int not null,
     boardgroup_no int not null,
     board_id varchar2(20) not null,
-    board_title varchar2(20) not null,
+    board_title varchar2(500) not null,
     board_content varchar2(2000) not null,
-    board_category int check(board_category in(0,1)), -- 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    board_category int check(board_category in(0,1)), -- 0Àº °øÁö»çÇ× 1Àº °í°´Áö¿ø
     board_date date not null
     );
 

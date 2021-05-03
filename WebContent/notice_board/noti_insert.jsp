@@ -34,7 +34,7 @@ $(function(){
           }, 
           fOnAppLoad : function(){
               //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-              oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
+              oEditors.getById["ir1"].exec("PASTE_HTML", [text]);
           },
           fCreator: "createSEditor2"
       });
@@ -49,37 +49,73 @@ $(function(){
  
  
 </script>
+ <style type="text/css">
  
+ .read{
+	border-collapse: separate;
+	border-spacing: 0 10px;
+}
+ 
+ 
+ </style>
 </head>
 <body>
 <%
 	String id = request.getParameter("id");
 %>
+<header>
+<jsp:include page="../header.jsp?id=<%=id %>"></jsp:include>
+<div class="category">
+      <a href="#"><i class="fas fa-desktop"></i> IT</a>
+      <a href="#"><i class="fas fa-utensils"></i> Cooking</a>
+      <a href="#"><i class="fas fa-language"></i> Language</a>
+      <a href="#"><i class="fas fa-coins"></i> Stock</a>
+      <a href="#"><i class="fas fa-palette"></i> Art</a>
+      <a href="#"><i class="fas fa-running"></i> Sport</a>
+      <a href="#"><i class="fas fa-map-marked"></i> Around Teacher</a>
+</div>
+</header>
+
 <form id="frm" action="noti_insertres.jsp" method="post" >
-<table width="100%">
+<table style="margin:30px auto 30px auto;" class="read">
         <tr>
-            <td>작성자</td>
-            <td><input type="text" id="id" name="board_id" value="<%=id %>" style="width:650px"/></td>
+            <td style="font-size: 12px;">작성자　</td>
+            <td><input type="text" class="form-control form-control-sm" id="id" name="board_id" value="<%=id %>" style="width:150px"  readonly="readonly"/></td>
         </tr>
         <tr>
-            <td>제목</td>
-            <td><input type="text" id="title" name="board_title" style="width:650px"/></td>
+            <td style="font-size: 12px;">제목</td>
+            <td><input type="text" class="form-control form-control-sm" id="title" name="board_title" style="width:680px"/></td>
         </tr>
         <tr>
-            <td>내용</td>
+            <td style="font-size: 12px;">내용</td>
             <td>
-                <textarea rows="10" cols="30" id="ir1" name="board_content" style="width:650px; height:350px; "></textarea>
+                <textarea rows="10" cols="30" id="ir1" name="board_content" style="width:678px; height:350px; "></textarea>
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <input type="button" id="save" value="저장"/>
-                <input type="button" value="취소"/>
+            <td colspan="2" align="right">
+                <input type="button" id="save" value="저장" class="btn btn-outline-dark"/>
+                <input type="button" value="취소"  class="btn btn-dark" onclick="location.href='noti_list.jsp?id=<%=id%>'"/>
             </td>
         </tr>
 </table>
 </form>
  
+ <footer>
+   <div class="last">
+      <span class="footerLogo">
+         <h1>LearnWay</h1>
+      </span>
+      <div class="addrWrap">
+         <sub>
+            서울시 강남구 테헤란로 TEL:1234-5678, FAX:1234-5679,
+            <p class="copyright">Copyright(C) 2021 All Right Reserved.</p>
+         </sub>
+         <a href="#"><sub>이용약관</sub></a>
+         <a href="#"><sub>개인정보처리방침</sub></a>
+      </div>
+   </div>
+</footer>
 </body>
 </html>
 

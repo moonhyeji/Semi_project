@@ -111,6 +111,7 @@ img{
 	LoginBiz biz = new LoginBiz();
 	
 	dto = biz.mypageView(member_id);
+	
 
 %>
 
@@ -124,6 +125,8 @@ img{
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
+                  
+                  
        		 <form action="mypage_info_update_tch.jsp" method="post">
        		 <input type="hidden" name="member_id" value="<%=member_id%>"> 
                  <div class="form-group">
@@ -146,7 +149,7 @@ img{
                    <div class="form-group">
 	                    <input class="btn btn-dark" type="button" value="강의목록" onclick="location.href='myclasslist.jsp?id=<%=member_id%>'"><br><br>
 						<input class="btn btn-dark" type="button" value="실시간 강의 시작" onclick=""><br><br>
-						<input class="btn btn-dark" type="button" value="회원 탈퇴" onclick=""><br><br>
+						<input class="btn btn-dark" type="button" value="회원 탈퇴" onclick="location.href='myclass_memdel.jsp?id=<%=member_id%>'"><br><br>
 						<input class="btn btn-dark" type="button" value="돌아가기" onclick="location.href='../index.jsp?id=<%=member_id%>'">
                    </div>
                    

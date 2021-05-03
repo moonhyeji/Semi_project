@@ -47,46 +47,12 @@ h1{
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
-window.onload = function(){
-progress = document.querySelector("progress");
-// upload 버튼을 클릭하면 파일을 업로드 한다.
-document.querySelector("button").onclick = function(){
-fileUpload();
-};
-};
 
-// 파일을 업로드 한다.
-function fileUpload(){
-var uploadFile = document.querySelector("input");
-
-var xhr = new XMLHttpRequest();
-
-// 업로드 시작 -> xhr.download.onloadstart로 하면 download
-xhr.upload.onloadstart = function(e){
-progress.value = 0;
-progress.style.display = "inline";
-};
-
-// 업로드 도중에 계속 발생 -> xhr.download.onprogress 하면 download
-xhr.upload.onprogress= function(e){
-// e.total : 전체 업로드 크기, e.loaded : 현재 업로드된 크기
-progress.value = e.loaded/e.total;
-console.log(progress.value);
-};
-
-// 업로드 종료 시 발생 -> xhr.download.onload 하면 download
-xhr.upload.onload = function(e){
-progress.style.display = "none";
-};
-
-xhr.onreadystatechange = function(){
-if(xhr.readyState == 4 && xhr.status == 200){
-document.querySelector("div").innerHTML = xhr.responseText + "<br>";
-}
-};
-xhr.open("POST", "fileuploadres.jsp", true);
-xhr.setRequestHeader("X-File-Name", encodeURIComponent(uploadFile.files[0].name));
-xhr.send(uploadFile.files[0]);
+function popup() {
+	var url = "fileupload.jsp";
+    var name = "강의 사진 업로드";
+    var option = "width = 520, height = 300, top = 100, left = 200, location = no"
+    window.open(url, name, option);
 }
 
 
@@ -104,12 +70,12 @@ xhr.send(uploadFile.files[0]);
 </head>
 <body>
 <%
-
-
 LessonDto dto = new LessonDto();
 
 String class_writer = request.getParameter("class_writer");
-
+String serverport = "8787";
+String realPath = "http://localhost:"+serverport+"/LearnWay_2week/fileupload";
+System.out.println(realPath);
 
 %>
 
@@ -146,7 +112,7 @@ String class_writer = request.getParameter("class_writer");
 	            	<div class="panel panel-default">
                			 <div class="panel-heading">
 							<h4>강의 정보</h4>
-							<br> 강의 유형 선택 <select id="class_tag" name="class_tag">
+							<br> 강의 유형 선택 <select id="class_tag" name="class_tag" >
 							   <option value="0">IT</option>
 							   <option value="1">Cook</option>
 							   <option value="2">Language</option>
@@ -217,7 +183,8 @@ String class_writer = request.getParameter("class_writer");
     <div class="panel-heading">
      <div class="text-center" style="width:1200px; margin-left:70px;" >
 		강의제목&emsp;&emsp;<input type="text" style="width: 500px" name="class_title" placeholder="강의제목을 입력해주세요."> 
-	</div> 
+	</div>
+
 	  </div>
 	    </div>
 	
@@ -225,7 +192,6 @@ String class_writer = request.getParameter("class_writer");
 		<!--섬머노트 --> 
 		<br>
 		<br>
-		
   <div class="container">
   <div class="text-center" style="width:1000px; margin-left:70px;" >
 		<textarea class="summernote" name="class_content" id="summernote">강의설명을 입력해 주세요</textarea>
@@ -259,23 +225,17 @@ String class_writer = request.getParameter("class_writer");
 		
 		
 		<br><br>	
-			
-<div class="form-group" style="margin-left:550px; margin-right:600px; margin-bottom:100px;" >
-	          	<div class="panel panel-default">
-              		<div class="panel-heading">		
-              			<h4>사진/동영상 파일 업로드</h4><br>
-					    <input class="title-header text-center" type="file"><br>
-						<span><button>upload</button>&emsp;<progress>0%</progress></span>
-					<br>
-		</div>
-	</div>
-</div>
+		<div class="form-group" style="margin-left:550px; margin-right:600px; margin-bottom:100px;" >
+			<input type="button" value="사진 업로드" onclick="popup();">
+			<input id="puploadfile" type="text" name="myclass_photo" value="" readonly="readonly">
+		</div>			
 		<div>
 		   <div class="title-header text-center">
 			 <input type="submit" value="강의등록" >&emsp;&emsp; <!-- submit???  -->
 			 <input type="button" value="뒤로가기" onclick="location.href='mypage_tch.jsp'">
 			</div>
-		</div>	  
+		</div>
+		<input type="hidden" name ="uploadpath" value="<%=realPath%>">
     <br>
     <br>
     <br>

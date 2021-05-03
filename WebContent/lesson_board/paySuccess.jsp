@@ -7,10 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>성공</h1>
+
+
+
+<input type="button" value="창닫기" onClick="window.close()">
 <script type="text/javascript">
-	alert("결재성공");
-	location.href="lesson_lst.jsp";
+	alert("결제성공");
+	
 </script>
+
 </body>
 </html>

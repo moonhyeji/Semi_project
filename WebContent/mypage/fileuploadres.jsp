@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.io.*" %>
-  <% request.setCharacterEncoding("UTF-8"); %>
-  <% response.setContentType("texthtml; charset=UTF-8"); %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<% request.setCharacterEncoding("UTF-8"); %>
+<% response.setContentType("texthtml; charset=UTF-8"); %>
 <%
 // 2번째 param에 명시된 서버만 서비스가 됨. 아래 코드는 모두 허용.
 response.setHeader("Access-Control-Allow-Origin", "*");
@@ -39,8 +32,6 @@ outFile.close();
 in.close();
 
 String fileUrl = application.getContextPath() + "/fileupload/" + uploadFileName;
-out.write("<a href='"+fileUrl+"'>"+fileName+"</a>");
+out.write(uploadFileName);
 }
 %>
-</body>
-</html>

@@ -8,5 +8,12 @@
 </head>
 <body>
 <h1>실패</h1>
+
+<input type="button" value="창닫기" onClick="window.close()">
+<script type="text/javascript">
+	alert("결제실패");
+	
+</script>
+
 </body>
 </html>

@@ -20,6 +20,15 @@ public class LoginDao extends SqlMapConfig {
 		return list;
 	}
 	
+	public List<LoginDto> mapList(){
+		
+		SqlSession session = getSessionFactory().openSession();
+		List<LoginDto> list = session.selectList("com.login.mapper."+"mapList");
+		
+		session.close();
+		return list;
+	}
+	
 	
 	public int insert(LoginDto dto) {
 		

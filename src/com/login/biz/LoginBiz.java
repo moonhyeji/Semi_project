@@ -16,7 +16,9 @@ public class LoginBiz {
 		return dao.selectList();
 		
 	}
-	
+	public List<LoginDto> mapList(){
+		return dao.mapList();
+	}
 	
 	public int insert(LoginDto dto) {
 		return dao.insert(dto);

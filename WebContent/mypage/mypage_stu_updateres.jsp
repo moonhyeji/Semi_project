@@ -37,21 +37,41 @@ int res = biz.mypageupdate(map);
 
 if(res > 0){ 
 %>
+     
 
-<script type="text/javascript">
-  alert("수강생정보 수정 성공");
-  location.href="mypage_stu.jsp?id=<%=member_id %>";
-</script>     
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		swal({
+			title : "정보가 수정되었습니다 ! ",
+			icon : "success"
+		}).then(function() {
+			location.href="mypage_stu.jsp?id=<%=member_id %>";
+		});
+	
+	 
+		
+	</script>
+	
 
 
 <%
 }else{
 %>
 
-  <script type="text/javascript">
-  alert("정보 수정 실패");
-  location.href="mypage_info_update_stu.jsp?member_id=<%=member_id%>";
-  </script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		swal({
+			title : "다시 시도해주세요  ",
+			icon : "error"
+		}).then(function() {
+			location.href="mypage_info_update_stu.jsp?member_id=<%=member_id%>";
+		});
+	
+	 
+		
+	</script>
+  
+  
   
 <%
 }

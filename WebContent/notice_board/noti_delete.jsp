@@ -17,24 +17,24 @@ response.setContentType("text/html; charset=UTF-8");
 <body>
 
 <%
-	int boardno = Integer.parseInt(request.getParameter("board_no"));
-	
+	int board_no = Integer.parseInt(request.getParameter("board_no"));
+	String id = request.getParameter("id");
 
 	NotiBiz biz = new NotiBiz();
-	int res = biz.delete(boardno);
+	int res = biz.delete(board_no);
 	
 	if (res > 0) {
 %>
 	<script type="text/javascript">
 		alert("글 삭제 성공");
-		location.href = "noti_list.jsp";
+		location.href = "noti_list.jsp?board_no=<%=board_no%>&id=<%=id%>";
 	</script>
 <%
 	} else {
 %>
 	<script type="text/javascript">
 		alert("글 삭제 실패");
-		location.href="noti_select.jsp?board_no=<%=boardno%>";
+		location.href="noti_select.jsp?board_no=<%=board_no%>&id=<%=id%>";
 	</script>
 <%
 	}

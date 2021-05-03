@@ -31,7 +31,7 @@
 	String member_detailAddress = request.getParameter("member_detailAddress");
 	String member_extraAddress = request.getParameter("member_extraAddress");
 	
-    String member_addr = " [" + member_postcode + "] " + member_address +member_detailAddress+member_extraAddress;
+    String member_addr = member_address+member_extraAddress;
     
     String member_question = request.getParameter("question");
     String member_answer = request.getParameter("answer");

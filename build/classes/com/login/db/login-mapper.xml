@@ -52,7 +52,8 @@
 	</select>
 	
 	<delete id="delete" parameterType="loginDto">
-		
+		DELETE FROM MEMBER
+		WHERE MEMBER_ID = #{member_id}
 	</delete>
 	
 	
@@ -94,7 +95,12 @@
 	   SET MEMBER_DEL = '1'
 	   WHERE MEMBER_ID = #{member_id}
 	</update>
-
+	
+	<select id="mapList" resultMap="loginMap">
+		SELECT MEMBER_NAME,MEMBER_ADDR
+	    FROM MEMBER
+		WHERE MEMBER_SELECT = 1 
+	</select>
 
 </mapper>
   

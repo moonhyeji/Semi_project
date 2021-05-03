@@ -30,15 +30,22 @@ response.setContentType("texthtml; charset=UTF-8");
 	</script>
 
 <%
-	}else {		
+	}else if(select.equals("0")){		
  %>
 
 	<script type="text/javascript">
-			location.href="mypage_stu.jsp?id=<%=member_id%>";
+			location.href="../admin_page/memberList.jsp?member_id=<%=member_id%>";
 	</script>
 
 
 	<% 
+	}else{
+%>
+	<script type="text/javascript">
+			location.href="mypage_stu.jsp?id=<%=member_id%>";
+	</script>
+<%
+
 	}
 
 %>

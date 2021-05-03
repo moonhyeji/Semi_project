@@ -39,21 +39,37 @@
 	if(findpw == null){
 
 %>
-
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
-		alert("비밀번호 찾기 실패 ");
-		location.href="findpw.jsp";
+		swal({
+			title : "비밀번호 찾기 실패",
+			icon : "error"
+		}).then(function() {
+			location.href="findpw.jsp";
+		});
+	
+	 
+		
 	</script>
+	
 
 <%
 	}else{
 
 %>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
-		alert("회원님의 비밀번호는 <%=findpw%> 입니다.");
-		location.href="main_regist.jsp";
-	
-	
+		swal({
+			title: "PASSWORD",
+			text : "<%=findpw%>",
+			icon : "info"
+		}).then(function() {
+			   location.href="main_regist.jsp";	   
+		});
+		
+	   
+
 	</script>
 	
 <%

@@ -15,10 +15,7 @@ public class adminListBiz {
 	public List<learnDto> learnList(){
 		return dao.learnList();
 	}
-	
-	public int adminCheck(String member_id, String member_name) {
-		int result = dao.adminCheck(member_id, member_name);
-		System.out.println("¾òÀº °ª : " + result);
-		return result;
+	public int adminCheck(String member_id) {
+		return dao.adminCheck(member_id);
 	}
 }

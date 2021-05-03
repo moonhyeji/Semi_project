@@ -22,48 +22,6 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <script>
-window.onload = function(){
-progress = document.querySelector("progress");
-// upload 버튼을 클릭하면 파일을 업로드 한다.
-document.querySelector("button").onclick = function(){
-fileUpload();
-};
-};
-
-// 파일을 업로드 한다.
-function fileUpload(){
-var uploadFile = document.querySelector("input");
-
-var xhr = new XMLHttpRequest();
-
-// 업로드 시작 -> xhr.download.onloadstart로 하면 download
-xhr.upload.onloadstart = function(e){
-progress.value = 0;
-progress.style.display = "inline";
-};
-
-// 업로드 도중에 계속 발생 -> xhr.download.onprogress 하면 download
-xhr.upload.onprogress= function(e){
-// e.total : 전체 업로드 크기, e.loaded : 현재 업로드된 크기
-progress.value = e.loaded/e.total;
-console.log(progress.value);
-};
-
-// 업로드 종료 시 발생 -> xhr.download.onload 하면 download
-xhr.upload.onload = function(e){
-progress.style.display = "none";
-};
-
-xhr.onreadystatechange = function(){
-if(xhr.readyState == 4 && xhr.status == 200){
-document.querySelector("div").innerHTML = xhr.responseText + "<br>";
-}
-};
-xhr.open("POST", "fileuploadres.jsp", true);
-xhr.setRequestHeader("X-File-Name", encodeURIComponent(uploadFile.files[0].name));
-xhr.send(uploadFile.files[0]);
-}
-
 
 /*-------------라디오버튼 ----------------------------*/
  
@@ -154,15 +112,9 @@ String class_writer = request.getParameter("class_writer");
 
 
 <br><br>	
-	
 <div>
-	<h4>사진/동영상 파일 업로드</h4>
-	<input type="file">
-	<button>upload</button>
-	<progress>0%</progress><br>
+<jsp:include page="fileupload.jsp"></jsp:include>
 </div>
-
-
 <div>
  <input type="submit" value="강의수정" > <!-- submit???  -->
  <input type="button" value="뒤로가기" onclick="location.href='mypage_tch.jsp'">

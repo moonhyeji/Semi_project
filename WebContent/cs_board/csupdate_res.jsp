@@ -23,6 +23,7 @@
 	int board_no = Integer.parseInt(request.getParameter("board_no"));
 	String board_title = request.getParameter("board_title");
 	String board_content = request.getParameter("board_content");
+	String board_id = request.getParameter("board_id");
 	
 
 	
@@ -40,14 +41,14 @@
 %>
 		<script type="text/javascript">
 			alert("글 수정 성공");
-			location.href="csselect.jsp?board_no=<%=board_no%>";			
+			location.href="csselect.jsp?board_no=<%=board_no%>&id=<%=board_id%>";			
 		</script>
 <%
 		} else {
 %>
 		<script type="text/javascript">
 			alert("글 수정 실패");
-			location.href="csupdate.jsp?board_no=<%=board_no%>";		
+			location.href="csupdate.jsp?board_no=<%=board_no%>&id=<%=board_id%>";		
 		</script>
 <%
 		}

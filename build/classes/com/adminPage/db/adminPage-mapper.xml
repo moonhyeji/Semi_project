@@ -53,12 +53,8 @@
 		FROM CLASS_BOARD ORDER BY CLASS_NO
 	</select>
 
-	<select id="CheckList" resultMap="loginMap">
-		SELECT MEMBER_ID, MEMBER_NAME FROM MEMBER
-	</select>
-
-	<select id="adminCheck" parameterType="Map" resultType="Int">
+	<select id="adminCheck" parameterType="String" resultType="Int">
 		SELECT MEMBER_SELECT FROM MEMBER 
-		WHERE MEMBER_ID = #{member_id} AND MEMBER_NAME = #{member_name}
+		WHERE MEMBER_ID = #{member_id}
 	</select>
 </mapper>

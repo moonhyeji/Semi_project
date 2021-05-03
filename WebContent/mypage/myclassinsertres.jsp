@@ -1,3 +1,5 @@
+<%@page import="com.media.biz.MediaBiz"%>
+<%@page import="com.media.dto.MediaDto"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -19,21 +21,24 @@
 
 <%
   String class_writer = request.getParameter("class_writer");
-
-              System.out.println(request.getParameter("class_writer"));
+  String path = request.getParameter("uploadpath");
+  String file = request.getParameter("myclass_photo");
+  String media_path = path + "/"+ file;
+  
+  System.out.println("---------------------");
+  System.out.println(class_writer);
+  System.out.println(media_path);
+  System.out.println("---------------------");
+  
   String class_tag = request.getParameter("class_tag");
   Date class_startdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_startdate"));
   Date class_lastdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_lastdate"));
-     
-               System.out.println(request.getParameter("class_price"));
+  
   int class_price = Integer.parseInt(request.getParameter("class_price"));
   int class_count = Integer.parseInt(request.getParameter("class_count"));
   
   String class_title = request.getParameter("class_title");
-  String class_content = request.getParameter("class_content");
-                System.out.println(class_tag );
-                System.out.println(class_startdate);
-  
+  String class_content = request.getParameter("class_content");  
   int eventcheck =  Integer.parseInt(request.getParameter("eventcheck"));
  
   
@@ -73,12 +78,21 @@
    dto.setClass_title(class_title);
    dto.setClass_content(class_content);
    
+   //-------------------------------
+   
+   MediaDto mdto = new MediaDto();
+   mdto.setClass_title(class_title);
+   mdto.setMedia_extension("photo");
+   mdto.setMedia_path(media_path);
+   
+   
   LessonBiz biz = new LessonBiz();
   int res = biz.insert(dto);
-  if(res > 0){
-	
-
-
+  
+  MediaBiz mbiz = new MediaBiz();
+  int mres = mbiz.mediainsert(mdto);
+  
+  if(res > 0 && mres > 0){
 %>
 
 	<script type="text/javascript">
@@ -93,7 +107,7 @@
 
 	<script type="text/javascript">
 	   alert("강의등록 실패");
-	   location.href="myinsert.jsp??id=<%=class_writer%>";
+	   location.href="myinsert.jsp?id=<%=class_writer%>";
 
 	   
 	</script>

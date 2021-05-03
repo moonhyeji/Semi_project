@@ -15,6 +15,7 @@
 <%
 	// SELECT에서 MYDELETE로 MYNO를 보내줬다. 
 	int board_no = Integer.parseInt(request.getParameter("board_no"));
+	String id = request.getParameter("id");
 
 	CsBiz biz = new CsBiz();
 	int res = biz.delete(board_no);
@@ -24,7 +25,7 @@
 %>	
 	<script type="text/javascript">
 		alert("글 삭제 성공");
-		location.href="cs_list.jsp";
+		location.href="cs_list.jsp?board_no=<%=board_no%>&id=<%=id%>";
 	</script>	
 <% 
 	} else {
@@ -32,7 +33,7 @@
 
 	<script type="text/javascript">
 		alert("글 삭제 실패");
-		location.href="csselect.jsp?board_no=<%=board_no%>"; // 다시 해당 글로 간다. 
+		location.href="csselect.jsp??board_no=<%=board_no%>&id=<%=id%>";
 	</script>
 	
 <%

@@ -1,3 +1,5 @@
+<%@page import="com.media.dto.MediaDto"%>
+<%@page import="com.media.biz.MediaBiz"%>
 <%@page import="org.apache.ibatis.javassist.bytecode.annotation.IntegerMemberValue"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.lesson.dto.LessonDto"%>
@@ -50,49 +52,6 @@ h1{
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script>
-window.onload = function(){
-progress = document.querySelector("progress");
-// upload 버튼을 클릭하면 파일을 업로드 한다.
-document.querySelector("button").onclick = function(){
-fileUpload();
-};
-};
-
-// 파일을 업로드 한다.
-function fileUpload(){
-var uploadFile = document.querySelector("input");
-
-var xhr = new XMLHttpRequest();
-
-// 업로드 시작 -> xhr.download.onloadstart로 하면 download
-xhr.upload.onloadstart = function(e){
-progress.value = 0;
-progress.style.display = "inline";
-};
-
-// 업로드 도중에 계속 발생 -> xhr.download.onprogress 하면 download
-xhr.upload.onprogress= function(e){
-// e.total : 전체 업로드 크기, e.loaded : 현재 업로드된 크기
-progress.value = e.loaded/e.total;
-console.log(progress.value);
-};
-
-// 업로드 종료 시 발생 -> xhr.download.onload 하면 download
-xhr.upload.onload = function(e){
-progress.style.display = "none";
-};
-
-xhr.onreadystatechange = function(){
-if(xhr.readyState == 4 && xhr.status == 200){
-document.querySelector("div").innerHTML = xhr.responseText + "<br>";
-}
-};
-xhr.open("POST", "fileuploadres.jsp", true);
-xhr.setRequestHeader("X-File-Name", encodeURIComponent(uploadFile.files[0].name));
-xhr.send(uploadFile.files[0]);
-}
-
-
 /*-------------라디오버튼 onevent 일 경우 버튼 자동클릭되도록 가져오기. ----------------------------*/
  function onevent(){
 	$(".event-detail").removeAttr("disabled"); //onevent 발동시 , eventattr속성을 삭제 
@@ -100,35 +59,71 @@ xhr.send(uploadFile.files[0]);
  function notevent(){
 		$(".event-detail").attr("disabled","disabled"); 
  } 
+ /* 
+ function SetSelectBox(){
+	    var selectedtag = $("#class_tag option:selected").val(); 
+	} */
+ 
  //-----------------------------------------------------
 </script>
 </head>
 <body>
 <%
 
-/* 
 LessonBiz biz = new LessonBiz();
-String class_writer = request.getParameter("class_writer");
- */
+
+int class_no = Integer.parseInt(request.getParameter("no"));
+LessonDto dto = biz.selectOne(class_no);
+String class_writer = dto.getClass_writer();
+
+MediaBiz mbiz = new MediaBiz();
+MediaDto mdto = mbiz.mediaOne(dto.getClass_title());
+String realPath = mdto.getMedia_path();
+System.out.println(realPath);
 
 
+//String class_writer = request.getParameter("class_writer");    //보내준게 없으니까 null잡힘. classlist 51번째 줄에서 안보내줘서 null잡힘  
+SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 
+ 
+// int class_tag = Integer.parseInt(request.getParameter("class_tag"));
+ ///////System.out.println(class_tag);
+  
+ 
+       
+ 
+//String class_tag = null;   (dto.getClass_tag()가 int타입일 때 이용 필요. )
+   
 
-
-int class_tag = Integer.parseInt(request.getParameter("class_tag"));
-Date class_startdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_startdate"));
-Date class_lastdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_lastdate"));
-int class_price = Integer.parseInt(request.getParameter("class_price"));
-int class_count = Integer.parseInt(request.getParameter("class_count"));
-
-int class_eventcheck = Integer.parseInt(request.getParameter("class_eventcheck"));
-Date class_eventstartdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_eventstartdate"));
-Date class_eventlastdate = new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("class_eventlastdate"));
-int class_eve
-
-
-
-%>
+ switch( dto.getClass_tag()){
+ 
+  //이 0은 switch 에 의해서 바껴서 한번 사용햇으니까. 
+  //dto.setClass_tag("0");  => dto.setClass_tag("it");   
+  case "0" : dto.setClass_tag("it");   //case "0" : class_tag ="it";        dto의 class_tag라는 변수가 string 타입이니까, 서버에서 불러온 값은 숫자이고, 이것을 string 다른 문자로 바꿈. 
+  break; 
+  
+  case "1" : dto.setClass_tag("Cook");
+  break;
+  
+  case "2" : dto.setClass_tag("Lanuage");
+  break;
+  
+  case "3" : dto.setClass_tag("Stock");
+  break;
+  
+  case "4" : dto.setClass_tag("Art");
+  break;
+  
+  case "5" : dto.setClass_tag("Sports");
+  break;
+  
+  }  
+    
+  
+  
+  
+  
+    %>
 
 
    <div class="container">
@@ -150,7 +145,7 @@ int class_eve
  <form action="myclassinsertres.jsp" method="post" name="forfunction">
  
 	<div>
-	<input type="hidden" name="class_writer" value="<%=class_writer%>"> 
+	   <input type="hidden" name="class_writer" value="<%=dto.getClass_writer() %>"> 
 	</div>
 <br>
       
@@ -163,38 +158,19 @@ int class_eve
 	            	<div class="panel panel-default">
                			 <div class="panel-heading">
 							<h4>강의 정보</h4>
-							<br> 강의 유형 선택 <select id="class_tag" name="class_tag">
-							   <option value="0">IT</option>
-							   <option value="1">Cook</option>
-							   <option value="2">Language</option>
-							   <option value="3">Stock</option>
-							   <option value="4">Art</option>
-							   <option value="5">Sports</option>
-							</select>
+						 <br> 강의 유형 선택 <input id="class_tag" name="class_tag" value="<%=dto.getClass_tag()%>" style="width:120px;" readonly="readonly">
+
+							
+							
 							<br>
-							<br>강의시작일 <input type="date" id="class_startdate" name="class_startdate">
+							<br>강의시작일 <input type="text" id="class_startdate" name="class_startdate" value="<%=date.format(dto.getClass_startdate()) %>" readonly="readonly">
 							<br>
-							<br> 강의종료일 <input type="date" id="class_lastdate" name="class_lastdate">
+							<br> 강의종료일 <input type="text" id="class_lastdate" name="class_lastdate" value="<%=date.format(dto.getClass_lastdate()) %>" readonly="readonly">
 							<br>
-							<br>강의가격 &emsp; <input type="text" id="class_price" name="class_price"  placeholder="ex) 59,000원">
+							<br>강의가격 &emsp; <input type="text" id="class_price" name="class_price"  value="<%=dto.getClass_price()%>" readonly="readonly">
 							<br>
-							<br> 강의수강생 최대인원 <select id="class_count" name="class_count">
-							                      <option value="0">1</option>
-								                  <option value="1">2</option>
-								                  <option value="2">3</option>
-								                  <option value="3">4</option>
-								                  <option value="4">5</option>
-								                  <option value="5">6</option>
-								                  <option value="6">7</option>
-								                  <option value="7">8</option>
-								                  <option value="8">9</option>
-								                  <option value="9">10</option>
-								                  <option value="10">11</option>
-								                  <option value="11">12</option>
-								                  <option value="12">13</option>
-								                  <option value="14">14</option>
-								                  <option value="15">15</option>
-                                                </select>
+							<br> 강의수강생 최대인원 <input type="text" style=" width: 30px;" id="class_count" name="class_count" value="<%=dto.getClass_count()%>" readonly="readonly">
+							                      
               </div>
 	          </div>
 	          </div>
@@ -206,18 +182,47 @@ int class_eve
               		<div class="panel-heading">
 					<h4>이벤트 중인 강의 정보</h4>
 					<br>
-					이벤트 유무<br>
-					<input type="radio" class="radio-value" name="eventcheck" value="1" onclick="onevent();">이벤트 중
-					<input type="radio" class="radio-value" name="eventcheck" value="0" onclick="notevent();">이벤트 아님 
+					이벤트 유무<br> 
+					
+					
+					 <%
+					 if(dto.getClass_eventcheck() == 1){
+					%>
+																 
+					<input type="radio" class="radio-value" name="eventcheck" value="1" checked="checked" onclick="return(false);">이벤트 중
+					
+					<input type="radio" class="radio-value" name="eventcheck" value="0"  onclick="return(false);">이벤트 아님 
+					
+					<br>
+					<br>이벤트 강의시작일 <input type="text" class="event-detail"  id="class_eventstartdate" name="class_eventstartdate" readonly="readonly" value="<%=date.format(dto.getClass_eventstartdate()) %>">
+					<br>
+					<br> 이벤트 강의종료일 <input type="text" class="event-detail" id="class_eventlastdate" name="class_eventlastdate" readonly="readonly" value="<%=date.format(dto.getClass_eventlastdate()) %>">
+					<br>
+					<br>이벤트 강의가격 &emsp; <input type="text" style="width:100px;" class="event-detail" id="class_eventprice" name="class_eventprice" readonly="readonly" value="<%=dto.getClass_eventprice()%>">
+					<br>
+					<br>
+					
+					<%
+					 }else{
+						 %>
+							<input type="radio" class="radio-value" name="eventcheck" value="1"  onclick="return(false);">이벤트 중
+							
+							<input type="radio" class="radio-value" name="eventcheck" value="0" checked="checked" onclick="return(false);" >이벤트 아님
+							
+					<br>
+					<br>이벤트 강의시작일 <input type="text" class="event-detail"  id="class_eventstartdate" name="class_eventstartdate" readonly="readonly" disabled value="<%=date.format(dto.getClass_eventstartdate()) %>">
+					<br>
+					<br> 이벤트 강의종료일 <input type="text" class="event-detail" id="class_eventlastdate" name="class_eventlastdate" readonly="readonly" disabled value="<%=date.format(dto.getClass_eventlastdate()) %>">
+					<br>
+					<br>이벤트 강의가격 &emsp; <input type="text" style="width:100px;" class="event-detail" id="class_eventprice" name="class_eventprice" disabled readonly="readonly" value="<%=dto.getClass_eventprice()%>">
+					<br>
+					<br>
+							
+				   <%
+					 }
+					%>
 					<!-- 이벤트 아님을 선택했을 때 아래 3개 비활성화하기  -->
-					<br>
-					<br>이벤트 강의시작일 <input type="date" class="event-detail"  id="class_eventstartdate" name="class_eventstartdate" >
-					<br>
-					<br> 이벤트 강의종료일 <input type="date" class="event-detail" id="class_eventlastdate" name="class_eventlastdate" >
-					<br>
-					<br>이벤트 강의가격 &emsp; <input type="text" class="event-detail" id="class_eventprice" name="class_eventprice" placeholder="ex) 39,000원">
-					<br>
-					<br>
+					
 					
 					</div>
 					  </div>
@@ -233,7 +238,7 @@ int class_eve
 <div class="panel panel-default">
     <div class="panel-heading">
      <div class="text-center" style="width:1200px; margin-left:70px;" >
-		강의제목&emsp;&emsp;<input type="text" style="width: 500px" name="class_title" placeholder="강의제목을 입력해주세요."> 
+		강의제목&emsp;&emsp;<input type="text" style="width: 500px" name="class_title" value="<%= dto.getClass_title()%> "> 
 	</div> 
 	  </div>
 	    </div>
@@ -245,11 +250,14 @@ int class_eve
 		
   <div class="container">
   <div class="text-center" style="width:1000px; margin-left:70px;" >
-		<textarea class="summernote" name="class_content" id="summernote">강의설명을 입력해 주세요</textarea>
+		<textarea class="summernote" name="class_content" id="summernote" readonly="readonly"><%=dto.getClass_content() %></textarea>
 		</div>
 		  
 		  
 		  <script>
+	      $('#summernote').summernote('disable');  // for disable editing 
+
+	      
 		    $(document).ready(function() {
 		        $('#summernote').summernote();
 		       
@@ -270,27 +278,20 @@ int class_eve
       });
       
       $('textarea[name="class_content"]').html($('.summernote').code());
+      
    </script>
    </div>
-		
+		<div>
+			<img src="<%=realPath %>" style="width: 200px; height: 200px;" />
+		</div>
 		
 		
 		<br><br>	
 			
-<div class="form-group" style="margin-left:550px; margin-right:600px; margin-bottom:100px;" >
-	          	<div class="panel panel-default">
-              		<div class="panel-heading">		
-              			<h4>사진/동영상 파일 업로드</h4><br>
-					    <input class="title-header text-center" type="file"><br>
-						<span><button>upload</button>&emsp;<progress>0%</progress></span>
-					<br>
-		</div>
-	</div>
-</div>
 		<div>
 		   <div class="title-header text-center">
-			 <input type="submit" value="강의 수정하기" onclick="location.href='myclassupdate.jsp?id=<%=class_writer%>'">&emsp;&emsp; <!-- submit???  -->
-			 <input type="button" value="뒤로가기" onclick="location.href='mypagelist.jsp?id=<%=class_writer%>'">
+			 <input type="submit" value="강의 수정하기" onclick="location.href='myclassupdate.jsp?id=<%=dto.getClass_writer()%>'">&emsp;&emsp; 
+			 <input type="button" value="뒤로가기" onclick="location.href='myclasslist.jsp?id=<%=class_writer%>'">
 			</div>
 		</div>	  
     <br>

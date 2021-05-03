@@ -44,7 +44,8 @@ footer {width: 100%;
 .header-list > li > div {width:auto;}
 .btn-right {margin-left: 20px;}
 .login{margin-left: 30px;}
-.join{margin-left: 13px;}
+.join{margin-left: 5px;}
+
 /* 검색창*/
 .search_Box {
 			 position :relative;

@@ -60,43 +60,80 @@ $(function(){
  
 
 </script>
+<style type="text/css">
 
+
+ .read{
+	border-collapse: separate;
+	border-spacing: 0 10px;
+}
+
+
+
+</style>
 </head>
 <body>
 
 <%
    int board_no = Integer.parseInt(request.getParameter("board_no"));
-
+   String id = request.getParameter("id");
          
    NotiBiz biz = new NotiBiz();
    NotiDto dto = biz.selectOne(board_no);
 
 
 %>
-   <h1>UPDATE</h1>
+<header>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="category">
+      <a href="#"><i class="fas fa-desktop"></i> IT</a>
+      <a href="#"><i class="fas fa-utensils"></i> Cooking</a>
+      <a href="#"><i class="fas fa-language"></i> Language</a>
+      <a href="#"><i class="fas fa-coins"></i> Stock</a>
+      <a href="#"><i class="fas fa-palette"></i> Art</a>
+      <a href="#"><i class="fas fa-running"></i> Sport</a>
+      <a href="#"><i class="fas fa-map-marked"></i> Around Teacher</a>
+</div>
+</header>
 
    <form id="frm" action="noti_updateres.jsp" method="post">
       <input type="hidden" name="board_no" value="<%=dto.getBoard_no()%>"/>      <!-- 글번호가 안보이게 했다. -->
-      <table width="100%">
+      <table style="margin:30px auto 30px auto;" class="read">
          <tr>
-            <th>작성자</th>
-            <td><%=dto.getBoard_id() %></td> <!-- 고정 -->
+            <td style="font-size: 12px;">작성자　</td>
+            <td><input type="text" class="form-control form-control-sm" value="<%=dto.getBoard_id() %>" style="width:150px" readonly="readonly"/></td>
          </tr>
          <tr>
-            <th>제목</th> <!-- 수정이 가능하게! -->
-            <td><input type="text" name="board_title" value="<%=dto.getBoard_title()%>"></td>
+            <td style="font-size: 12px;">제목</td> <!-- 수정이 가능하게! -->
+            <td><input type="text" name="board_title" style="width:680px" value="<%=dto.getBoard_title()%>" class="form-control form-control-sm" ></td>
          </tr>
          <tr>
-            <th>내용</th> <!-- 수정이 가능하게! -->
-            <td><textarea rows="10" cols="30" id="ir1" name="board_content" style="width:650px; height:350px; "><%=dto.getBoard_content()%></textarea></td>
+            <td style="font-size: 12px;">내용</td> <!-- 수정이 가능하게! -->
+            <td><textarea rows="10" cols="30" id="ir1" name="board_content" style="width:678px; height:350px; "><%=dto.getBoard_content()%></textarea></td>
          </tr>
          <tr>
             <td colspan="2" align="right">
-               <input type="button" id="save" value="수정"/>
-               <input type="button" value="취소" onclick="" />
+               <input type="button" id="save" value="수정" class="btn btn-outline-dark"/>
+               <input type="button" value="취소" onclick="location.href='noti_select.jsp?board_no=<%=board_no%>&id=<%=id%>'" class="btn btn-dark"/>
             </td>
          </tr>
       </table>
    </form>
+   
+ <footer>
+   <div class="last">
+      <span class="footerLogo">
+         <h1>LearnWay</h1>
+      </span>
+      <div class="addrWrap">
+         <sub>
+            서울시 강남구 테헤란로 TEL:1234-5678, FAX:1234-5679,
+            <p class="copyright">Copyright(C) 2021 All Right Reserved.</p>
+         </sub>
+         <a href="#"><sub>이용약관</sub></a>
+         <a href="#"><sub>개인정보처리방침</sub></a>
+      </div>
+   </div>
+</footer>	  
 </body>
 </html>

@@ -47,18 +47,13 @@ create table board(
 
 
 create SEQUENCE classboard_seq;
-
-create SEQUENCE classboard_seq;
-
-create SEQUENCE classboard_seq;
 create table class_board(
     class_no int primary key,
     class_tag int check(class_tag in(0,1,2,3,4,5)), -- 0:IT , 1:cook , 2:language, 3: stock , 4: art , 5: sports
     class_title varchar2(100) not null,
-    class_writer varchar2(20) not null,
+    class_writer varchar2(20) REFERENCES member(member_id),
     class_content varchar2(4000) not null,
     class_price int not null,
-	class_view int,
     class_count int default 0 not null ,
     class_startdate date not null,
     class_lastdate date not null,
@@ -68,35 +63,13 @@ create table class_board(
     class_eventlastdate date not null
 );
 
-select * from class_board;
-
-insert into class_board
-values(123, 0, '강의제목', '강사1','강의내용내용내용','1000', 1, 20, '20210430','20210520',0,0,'20101010','20101012' );
-
-
-select*from CLASS_BOARD;
-
 create SEQUENCE myclass_seq;
-create SEQUENCE myclass_seq;
-
 
 create table myclass(
     myclass_no int PRIMARY key,
-    class_no int not null,
-	class_title varchar2(100) not null,
-	class_writer varchar2(20) not null,
-	class_startdate date not null,
-	class_lastdate date not null,
-    member_id varchar2(20)
+    class_no int REFERENCES class_board(class_no),
+    member_id varchar2(20) REFERENCES member(member_id)
 );
-
-insert into MYCLASS
-values(myclass_seq.nextval, 123, '강의제목 아이티','강사1','20210430','20210520','tch1');
-
-select * from myclass;
-
-
-
 
 create SEQUENCE media_seq;
 create table media(

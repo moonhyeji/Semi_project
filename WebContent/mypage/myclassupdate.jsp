@@ -37,8 +37,9 @@
 LessonBiz biz = new LessonBiz();
 int no = Integer.parseInt(request.getParameter("no"));
 
-
 LessonDto dto = biz.selectOne(no);
+
+
 //System.out.println("2");
 %>
 

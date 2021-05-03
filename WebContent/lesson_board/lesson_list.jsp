@@ -24,9 +24,9 @@ response.setContentType("texthtml; charset=UTF-8");
 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 		//실행할 로직 (콘텐츠 추가)
 	    count++;
-	    var addContent = $('.container').clone();
-	    //article에 추가되는 콘텐츠를 append
-	    $('article').append(addContent);
+		var addContent = $('.container').clone();
+		//article에 추가되는 콘텐츠를 append
+		$('article').append(addContent);
 		}
 	};
 
@@ -34,15 +34,11 @@ response.setContentType("texthtml; charset=UTF-8");
 
 </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/9b7675f701.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
 <style type="text/css">
 
 body {background:#fff;}
-
-
-
 
 
 .card-teacher{
@@ -79,17 +75,12 @@ body {background:#fff;}
 	border-radius: 30px;
 }
 
-header{
-	position: fixed;
-	top: 0;
-  	left: 0;
-  	right: 0;
-
-}
 
 .body_scroll {
-	padding-top: 150px;
+	padding-top: 70px;
 }
+
+
 </style>
 
 </head>
@@ -102,77 +93,18 @@ header{
 
 	dto = biz.mypageView(member_id);
 %>
-<header>
-	
-			<!-- 로고 -->
-			<ul class="header-list">
-				<li><div><img alt="로고" src="resources/image/main_Logo.png" width="170px" height="40px"/></div></li>
-				
-			<!-- 검색창 -->	
-				<li>
-				<div class="searchContainer">
-					<div class="search_Box">
-						<table class="search_Elements">
-							<tr>
-								<td>
-									<input type="text" placeholder="찾으시는 클래스가 있으신가요?" class="search">
-								</td>
-								<td>
-									<a href="#"><img src="resources/image/search_icon.png" style="float: right;"/></a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				</li>
-					
-		 
-			<!-- 메뉴 -->	
-				<li>
-					<div class="btn-group">
-					  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-					    Menu
-					  </button>
-					  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="#">강의</a></li>
-					    <li><a class="dropdown-item" href="#">이벤트</a></li>
-					    <li><a class="dropdown-item" href="#">공지사항</a></li>
-					    <li><a class="dropdown-item" href="#">고객센터</a></li>
-					    <li><a class="dropdown-item" href="#">실시간상담</a></li>
-					    <li><hr class="dropdown-divider"></li>
-					    <li><a class="dropdown-item" href="#">마이페이지</a></li>
-					  </ul>
-					</div>				
-				</li>
-			
-				
-					<li>
-						<div class="login">
-			     			 <a href="#"><i class="fas fa-sign-in-alt"></i>LOGIN</a>
-			   			</div>
-					</li>
-					
-					<li>   
-					   <div class="join">
-					      <a href="#"><i class="fas fa-user-friends"></i> JOIN</a>
-					   </div>
-				   </li>
-							   
-				
-				 
-				</ul>
-			
-			<div class="category">
-				<a href="#"><i class="fas fa-desktop"></i> IT</a>
-				<a href="#"><i class="fas fa-utensils"></i> Cooking</a>
-				<a href="#"><i class="fas fa-language"></i> Language</a>
-				<a href="#"><i class="fas fa-coins"></i> Stock</a>
-				<a href="#"><i class="fas fa-palette"></i> Art</a>
-				<a href="#"><i class="fas fa-running"></i> Sport</a>
-				<a href="#"><i class="fas fa-map-marked"></i> Around Teacher</a>
-			</div>
-		
 
+<header>
+<jsp:include page="../header.jsp?id=<%=member_id %>"></jsp:include>
+<div class="category">
+      <a href="#"><i class="fas fa-desktop"></i> IT</a>
+      <a href="#"><i class="fas fa-utensils"></i> Cooking</a>
+      <a href="#"><i class="fas fa-language"></i> Language</a>
+      <a href="#"><i class="fas fa-coins"></i> Stock</a>
+      <a href="#"><i class="fas fa-palette"></i> Art</a>
+      <a href="#"><i class="fas fa-running"></i> Sport</a>
+      <a href="#"><i class="fas fa-map-marked"></i> Around Teacher</a>
+</div>
 </header>
 
 <main>
@@ -391,21 +323,7 @@ header{
 
 </main>
 
-<footer>
-	<div class="last">
-		<span class="footerLogo">
-			<h1>LearnWay</h1>
-		</span>
-		<div class="addrWrap">
-			<sub>
-				서울시 강남구 테헤란로 TEL:1234-5678, FAX:1234-5679,
-				<p class="copyright">Copyright(C) 2021 All Right Reserved.</p>
-			</sub>
-			<a href="#"><sub>이용약관</sub></a>
-			<a href="#"><sub>개인정보처리방침</sub></a>
-		</div>
-	</div>
-</footer>
+<jsp:include page="footer.jsp?id=<%=member_id %>"></jsp:include>
 
 
 </body>
