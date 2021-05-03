@@ -75,11 +75,11 @@ LessonBiz biz = new LessonBiz();
 int class_no = Integer.parseInt(request.getParameter("no"));
 LessonDto dto = biz.selectOne(class_no);
 String class_writer = dto.getClass_writer();
-
+/* 
 MediaBiz mbiz = new MediaBiz();
 MediaDto mdto = mbiz.mediaOne(dto.getClass_title());
 String realPath = mdto.getMedia_path();
-System.out.println(realPath);
+System.out.println(realPath); */
 
 
 //String class_writer = request.getParameter("class_writer");    //보내준게 없으니까 null잡힘. classlist 51번째 줄에서 안보내줘서 null잡힘  
@@ -142,11 +142,12 @@ SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 
 
 
- <form action="myclassinsertres.jsp" method="post" name="forfunction">
+ <form action="myclassupdate.jsp" method="post" name="forfunction">
  
 	<div>
 	   <input type="hidden" name="class_writer" value="<%=dto.getClass_writer() %>"> 
-	</div>
+	   <input type="hidden" name="class_no" value="<%=class_no %>">
+	   	</div>
 <br>
       
 <div>
@@ -208,20 +209,19 @@ SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 							<input type="radio" class="radio-value" name="eventcheck" value="1"  onclick="return(false);">이벤트 중
 							
 							<input type="radio" class="radio-value" name="eventcheck" value="0" checked="checked" onclick="return(false);" >이벤트 아님
-							
+												<!-- 이벤트 아님을 선택했을 때 아래 3개 비활성화하기  -->
 					<br>
-					<br>이벤트 강의시작일 <input type="text" class="event-detail"  id="class_eventstartdate" name="class_eventstartdate" readonly="readonly" disabled value="<%=date.format(dto.getClass_eventstartdate()) %>">
+					<br>이벤트 강의시작일 <input type="text" class="event-detail"  id="class_eventstartdate" name="class_eventstartdate" readonly="readonly"  value="0000-00-00">
 					<br>
-					<br> 이벤트 강의종료일 <input type="text" class="event-detail" id="class_eventlastdate" name="class_eventlastdate" readonly="readonly" disabled value="<%=date.format(dto.getClass_eventlastdate()) %>">
+					<br> 이벤트 강의종료일 <input type="text" class="event-detail" id="class_eventlastdate" name="class_eventlastdate" readonly="readonly"  value="0000-00-00">
 					<br>
-					<br>이벤트 강의가격 &emsp; <input type="text" style="width:100px;" class="event-detail" id="class_eventprice" name="class_eventprice" disabled readonly="readonly" value="<%=dto.getClass_eventprice()%>">
+					<br>이벤트 강의가격 &emsp; <input type="text" style="width:100px;" class="event-detail" id="class_eventprice" name="class_eventprice"  readonly="readonly" value="<%= 0%>">
 					<br>
 					<br>
 							
 				   <%
 					 }
 					%>
-					<!-- 이벤트 아님을 선택했을 때 아래 3개 비활성화하기  -->
 					
 					
 					</div>
@@ -238,7 +238,7 @@ SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 <div class="panel panel-default">
     <div class="panel-heading">
      <div class="text-center" style="width:1200px; margin-left:70px;" >
-		강의제목&emsp;&emsp;<input type="text" style="width: 500px" name="class_title" value="<%= dto.getClass_title()%> "> 
+		강의제목&emsp;&emsp;<input type="text" style="width: 500px" readonly="readonly" name="class_title" value="<%= dto.getClass_title()%> "> 
 	</div> 
 	  </div>
 	    </div>
@@ -281,16 +281,16 @@ SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
       
    </script>
    </div>
-		<div>
+		<%-- <div>
 			<img src="<%=realPath %>" style="width: 200px; height: 200px;" />
 		</div>
 		
-		
+		 --%>
 		<br><br>	
 			
 		<div>
 		   <div class="title-header text-center">
-			 <input type="submit" value="강의 수정하기" onclick="location.href='myclassupdate.jsp?id=<%=dto.getClass_writer()%>'">&emsp;&emsp; 
+			 <input type="submit" value="강의 수정하기" >&emsp;&emsp; 
 			 <input type="button" value="뒤로가기" onclick="location.href='myclasslist.jsp?id=<%=class_writer%>'">
 			</div>
 		</div>	  

@@ -115,7 +115,7 @@ td{
 						%>
 						<tr>
 							<td style="background-color:WhiteSmoke"><%=dto.getClass_no()%></td>
-							<td><a href="myclassupdate.jsp?no=<%=dto.getClass_no()%>"><%=dto.getClass_title()%></a></td>
+							<td><a href="myclass_selectone.jsp?no=<%=dto.getClass_no()%>"><%=dto.getClass_title()%></a></td>
 							<td style="background-color:WhiteSmoke"><%=date.format(dto.getClass_startdate())%></td>
 							<td style="background-color:WhiteSmoke"><%=date.format(dto.getClass_lastdate())%></td>
 						</tr>
@@ -139,7 +139,7 @@ td{
 		<br>
 		
 		<!-- 페이지 가운데로 몰기 -->
-	 <div class="form-group" style="margin-left:600px; margin-bottom:20px;" >
+	<!--  <div class="form-group" style="margin-left:600px; margin-bottom:20px;" >
 		<div class="board_num">
 			<ul class="pagination">
 				<li class="page-item"><a class="page-link" href=""> < </a></li>
@@ -152,7 +152,7 @@ td{
 			</ul>
 
 		</div>
-	</div>
+	</div> -->
 	<br>
 	<br>
 	<br>

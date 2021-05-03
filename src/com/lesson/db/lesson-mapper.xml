@@ -35,11 +35,11 @@
 		</select>
 		
 		
-		 <!-- 한강사의모든 강의    --> 
+		 <!-- 한강사의모든 강의    -->                                 <!--  결과값-->
 		 <select id="select_tchlist" parameterType="String" resultMap="LessonMap">
               SELECT CLASS_NO, CLASS_TITLE, CLASS_WRITER, CLASS_CONTENT, CLASS_PRICE, CLASS_STARTDATE, CLASS_LASTDATE
 		      FROM CLASS_BOARD
-		      WHERE CLASS_WRITER = #{class_writer}
+		      WHERE CLASS_WRITER = #{class_writer}  
 		      ORDER BY CLASS_NO DESC		 
 		 </select>
 		 
@@ -54,9 +54,9 @@
 		</insert>
 	  
 	    <!-- 강의 수정  -->
-	    <update id="update" parameterType="Map">
+	    <update id="update" parameterType="LessonDto">
 	    UPDATE CLASS_BOARD
-	    SET CLASS_STARTDATE =#{startdate} , CLASS_LASTDATE =?, CLASS_PRICE =?, CLASS_COUNT =?, CLASS_EVENTCHECK =?, CLASS_EVENTPRICE =? , CLASS_EVENTSTARTDATE =?, CLASS_EVENTLASTDATE = ?
+	    SET CLASS_STARTDATE =#{class_startdate} , CLASS_LASTDATE =#{class_lastdate}, CLASS_PRICE =#{class_price}, CLASS_COUNT =#{class_count}, CLASS_EVENTCHECK =#{class_eventcheck}, CLASS_EVENTPRICE =#{class_eventprice} , CLASS_EVENTSTARTDATE =#{class_eventstartdate}, CLASS_EVENTLASTDATE = #{class_eventlastdate}
 	    WHERE CLASS_NO = #{class_no}
 	    </update>
 	    
