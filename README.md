@@ -4,7 +4,7 @@
 - - -
 
 Learnway 발표 pdf파일    
-[Learnway.pdf]
+[Learnway.pdf]    
 (https://github.com/moonhyeji/Semi_project/blob/main/semiproject_team2.pdf)
 
 
