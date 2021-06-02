@@ -147,8 +147,8 @@ img{
                   </div>
                   
                    <div class="form-group">
-						<input class="btn btn-dark" type="button" value="수강 강의 듣기" onclick=""><br><br>
-						<input class="btn btn-dark" type="button" value="회원 탈퇴" onclick=""><br><br>
+						<input class="btn btn-dark" type="button" value="수강 강의 목록" onclick="location.href='myclassList_stu.jsp?id=<%=member_id%>'"><br><br>
+						<input class="btn btn-dark" type="button" value="회원 탈퇴" onclick="location.href='myclass_memdel.jsp?id=<%=member_id%>'"><br><br>
 						<input class="btn btn-dark" type="button" value="돌아가기" onclick="location.href='../index.jsp?id=<%=member_id%>'">
                    </div>
                    

@@ -17,13 +17,26 @@ create table member(
     member_regdate date not null
 );
 select * from member; where member_select = 2;
+
 insert into member
 values(member_seq.nextval, 'admin', 'admin1234', '관리자', '20210420',null,'kh정보교육원','010-0000-0000', 'admin@kh.com', 'F', 0, '관리자니?', '네',0, sysdate );
 -------------------------------------------------------------
 drop table class_board;
 drop SEQUENCE classboard_seq;
 
-delete from class_board where class_no = 24;
+delete from class_board where class_no = 162;
+
+select* from class_board; where class_tag = 0 order by class_no desc;
+select class_view from class_board order by class_view desc;
+select * from class_board where class_tag = 1;
+
+
+
+select class_title,class_view,dense_rank() OVER (ORDER BY class_view DESC ) as rk from class_board; 
+
+select * from class_board; order by class_view desc;
+
+select * from class_board where class_title like '%고든%';
 
 create SEQUENCE classboard_seq;
 create table class_board(
@@ -60,7 +73,8 @@ create table myclass(
 drop SEQUENCE media_seq;
 drop table media;
 
-select * from media;
+update media set class_title = '자바를 자바자바2 속았지 c#' where class_title = '자바를 자바자바2 속았지 c';
+delete from media where media_no = 20;
 create SEQUENCE media_seq;
 create table media(
     media_no int primary key,
@@ -69,6 +83,7 @@ create table media(
     media_path varchar2(2000) not null
 );
 
+select * from media;
 ------------------- 공지사항, 고객지원 게시판-----------------
 drop SEQUENCE board_seq;
 drop SEQUENCE boardgroup_seq;
@@ -89,3 +104,10 @@ create table board(
     );
 
 ----------------------------------------------------------------
+
+create table webrtc(
+	class_title varchar2(100) not null,
+	webrtc_link varchar2(1000)
+);
+
+    

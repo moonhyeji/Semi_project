@@ -12,11 +12,52 @@ response.setContentType("texthtml; charset=UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/9b7675f701.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+<style type="text/css">
+
+#map {
+	margin: 13px auto 50px auto;
+	border: 3px solid gray;
+	
+}
+
+*{
+font-family: 'Acme', sans-serif;
+
+}
+
+
+
+
+
+</style>
+
 </head>
 <body>
-<div id="map" style="width:600px;height:350px;"></div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b118fdf4bf7c9e5407bcb4077257451&libraries=services"></script>
+
+<header>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="category">
+
+      <a href="#"><i class="fas fa-desktop"></i> IT</a>
+      <a href="#"><i class="fas fa-utensils"></i> Cooking</a>
+      <a href="#"><i class="fas fa-language"></i> Language</a>
+      <a href="#"><i class="fas fa-coins"></i> Stock</a>
+      <a href="#"><i class="fas fa-palette"></i> Art</a>
+      <a href="#"><i class="fas fa-running"></i> Sport</a>
+      <a href="#"><i class="fas fa-map-marked"></i> Around Teacher</a>
+     
+</div>
+</header>
+
+
+<p style="padding: 16px 10px 10px 10px; font-size: 18pt; font-weight: bold; text-align: center; font-family: 'Acme', sans-serif;">가까운 위치에서 강사를 찾아보세요 !</p>
+
+<div id="map" style="width:800px;height:350px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2602eebc257f1d562e35b9586f2c4c2e&libraries=services"></script>
  <script>
         var mapContainer = document.getElementById('map'); // 지도를 표시할 div  
         mapOption = {
@@ -34,7 +75,7 @@ response.setContentType("texthtml; charset=UTF-8");
  	LoginBiz biz = new LoginBiz();
  	List<LoginDto> list = biz.mapList();
  	
- 	String member_id = "죄송해요";
+ 	String member_id = request.getParameter("id");
 	LoginBiz stubiz = new LoginBiz();
 	LoginDto studto = new LoginDto();
 	studto = stubiz.mypageView(member_id);
@@ -71,7 +112,7 @@ response.setContentType("texthtml; charset=UTF-8");
                               // 마커를 지도에 표시합니다.
                               marker.setMap(map);
 							
-                              var content = '<div class ="labelWish"><span class="leftWish"></span><span class="centerWish">'
+                              var content = '<div class ="labelWish"><span class="leftWish"></span><span class="centerWish" style="font-weight:bold; font-size:13pt;">'
                                       + addressName[i]
                                       + '</span><span class="rightWish"></span></div>';
                                       console.log(addressName[cnt]);        
@@ -84,9 +125,6 @@ response.setContentType("texthtml; charset=UTF-8");
 
                               // 커스텀 오버레이를 지도에 표시합니다
                               customOverlay.setMap(map);
-
-                              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                              map.setCenter(coords);
                           }
                       });
 		
@@ -115,9 +153,9 @@ response.setContentType("texthtml; charset=UTF-8");
    	
    	        // 인포윈도우로 장소에 대한 설명을 표시합니다
    	        var infowindow = new kakao.maps.InfoWindow({
-   	            content: '<div style="width:150px;text-align:center;padding:6px 0;">내 위치</div>'
-   	        });
-   	        infowindow.open(map, marker);
+   	            content: '<div style="width:170px;text-align:center; padding: 5px 0;"><a style="font-weight:bold;"><%=member_id%>님의 위치</a></div>'
+   	        });																				
+   	        infowindow.open(map, marker)
    	
    	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
    	        map.setCenter(coords);
@@ -125,5 +163,10 @@ response.setContentType("texthtml; charset=UTF-8");
    	}); 
     
  </script>
+ 
+ 
+ 
+ 
+ <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

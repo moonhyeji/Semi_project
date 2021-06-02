@@ -326,15 +326,6 @@ String class_content = request.getParameter("class_content");
 		
 		<br><br>	
 			
-   <div class="form-group" style="margin-left:550px; margin-right:600px; margin-bottom:100px;" >
-	          	<div class="panel panel-default">
-              		<div class="panel-heading">		
-              			<h4>사진/동영상 파일 업로드</h4><br>
-					    <input class="title-header text-center" type="file"><br>
-						<span><button>upload</button>&emsp;<progress>0%</progress></span>
-					<br>
-		</div>
-	</div>
 </div>	
 		<div>
 		   <div class="title-header text-center">

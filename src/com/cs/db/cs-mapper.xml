@@ -64,7 +64,7 @@
   <select id="searchlist" parameterType="String" resultMap="CsDto">
     	SELECT *
     	FROM BOARD
-    	WHERE BOARD_CATEGORY = '1' AND BOARD_TITLE LIKE #{text} || '%'
+    	WHERE BOARD_CATEGORY = '1' AND BOARD_TITLE LIKE '%' || #{text} || '%'
     	ORDER BY BOARD_NO DESC
   </select>
   

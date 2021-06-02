@@ -29,6 +29,11 @@
 		ORDER BY MEMBER_NO DESC 
 	</select>
 	
+	<insert id="insert2" parameterType="loginDto">
+		INSERT INTO MEMBER
+		VALUES(MEMBER_SEQ.NEXTVAL,#{member_id},#{member_pw},#{member_name},#{member_birth},#{member_platform},#{member_addr},#{member_phone},#{member_email},#{member_gender},#{member_select},#{member_question},#{member_answer},0,SYSDATE)
+	</insert>
+	
 	<insert id="insert" parameterType="loginDto">
 		INSERT INTO MEMBER
 		VALUES(MEMBER_SEQ.NEXTVAL,#{member_id},#{member_pw},#{member_name},#{member_birth},NULL,#{member_addr},#{member_phone},#{member_email},#{member_gender},#{member_select},#{member_question},#{member_answer},0,SYSDATE)
@@ -61,7 +66,6 @@
 		SELECT *
 		FROM MEMBER
 	    WHERE MEMBER_ID = #{item1} AND MEMBER_PW = #{item2}
-	    
 	</select>
 	
 	
@@ -84,7 +88,7 @@
 		WHERE MEMBER_ID = #{member_id}
 	</select>
 	
-	<update id="mypageupdate" parameterType="hashMap">
+	<update id="mypageupdate" parameterType="hashMap"> 
 	 	UPDATE MEMBER 
 	    SET MEMBER_NAME = #{item2},MEMBER_PHONE = #{item3},MEMBER_ADDR= #{item4}
 	    WHERE MEMBER_ID = #{item1}
@@ -101,6 +105,18 @@
 	    FROM MEMBER
 		WHERE MEMBER_SELECT = 1 
 	</select>
+	
+	
+	<select id="selectone" parameterType="Map" resultType="String"> 
+	SELECT MEMBER_ID
+	FROM MEMBER
+	WHERE MEMBER_PLATFORM = #{platform}
+	AND MEMBER_ID = #{email}
+	</select>
+	
+	
+	
+	
 
 </mapper>
   

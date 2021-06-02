@@ -290,7 +290,8 @@ SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 			
 		<div>
 		   <div class="title-header text-center">
-			 <input type="submit" value="강의 수정하기" >&emsp;&emsp; 
+			 <input type="submit" value="강의 수정하기" >&emsp;&emsp;
+			 <input type="button" value="강의삭제" onclick="location.href='myclassdelete.jsp?class_writer=<%=class_writer %>&class_no=<%=class_no %>'"> 
 			 <input type="button" value="뒤로가기" onclick="location.href='myclasslist.jsp?id=<%=class_writer%>'">
 			</div>
 		</div>	  

@@ -10,9 +10,9 @@ public class MediaDao extends SqlMapConfig {
 
 	private String namespace = "com.media.mapper.";
 	
-	public List<MediaDto> videoList(){
+	public List<MediaDto> videoList(String class_title){
 		SqlSession session = getSessionFactory().openSession();
-		List<MediaDto> list = session.selectList(namespace+"videoList");
+		List<MediaDto> list = session.selectList(namespace+"videoList",class_title);
 		
 		session.close();
 		return list;

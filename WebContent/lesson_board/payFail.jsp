@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+request.setCharacterEncoding("UTF-8");
+response.setContentType("texthtml; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +17,7 @@
 <input type="button" value="창닫기" onClick="window.close()">
 <script type="text/javascript">
 	alert("결제실패");
-	
+	self.close();
 </script>
 
 </body>

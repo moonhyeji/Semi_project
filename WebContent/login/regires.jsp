@@ -35,10 +35,15 @@
     
     String member_question = request.getParameter("question");
     String member_answer = request.getParameter("answer");
+    String platform = request.getParameter("platform");
     
     
 	
 	LoginDto dto = new LoginDto();
+	
+	if (platform!=null) {
+		dto.setMember_platform(platform);
+	} 
 	
 	dto.setMember_id(member_id); 
 	dto.setMember_pw(member_pw); 
@@ -74,7 +79,7 @@
 
 	<script type="text/javascript">
 	alert("회원가입 성공");
-	location.href="../index.jsp";
+	location.href="../index.jsp?id=<%=member_id%>";
 	</script>
 	
 	<%

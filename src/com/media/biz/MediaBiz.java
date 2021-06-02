@@ -9,8 +9,8 @@ public class MediaBiz {
 
 	private MediaDao dao = new MediaDao();
 	
-	public List<MediaDto> videoList(){
-		return dao.videoList();
+	public List<MediaDto> videoList(String class_title){
+		return dao.videoList(class_title);
 	}
 	
 	public MediaDto mediaOne(String class_title) {

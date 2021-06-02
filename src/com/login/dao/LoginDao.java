@@ -2,7 +2,7 @@ package com.login.dao;
 
 import java.util.List;
 import java.util.Map;
-
+import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 
 import com.login.dto.LoginDto;
@@ -35,13 +35,24 @@ public class LoginDao extends SqlMapConfig {
 		int res = 0;
 		
 		try(SqlSession session = getSessionFactory().openSession(true)){
-			res = session.insert(namespace+"insert",dto);
-		}
+			
+			if (dto.getMember_platform() == null){
+				res = session.insert(namespace+"insert",dto);
+			} else {
+				res = session.insert(namespace+"insert2",dto);
+			}
+			
+		} 
+		
+		
 		
 		return res;
 	}
 	
 
+
+	
+	
 	public int  update(LoginDto dto) {
 		
 		int res = 0;
@@ -186,6 +197,23 @@ public class LoginDao extends SqlMapConfig {
 		return res;
 	}
 
+//     네이버.
+	    public String selectone(String email, String platform) {
+		SqlSession session = null;
+		String res = null;
+		
+		Map map = new HashMap();  
+		map.put("email", email);
+		map.put("platform",platform);
+		
+		session = getSessionFactory().openSession();
+		res = session.selectOne(namespace+"selectone", map);
+		
+		session.commit();
+		session.close();
+		
+		return res;
+	}
 }
 
 

@@ -102,6 +102,25 @@ img{
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	function linkinsert() {
+		var ourl = "webrtc.jsp";
+	    var oname = "webrtc";
+		 var option = "width = 520, height = 300, top = 100, left = 200"
+		 window.open(ourl,oname,option);
+	}
+
+	function webrtc() {
+		var url = "https://49.170.22.193:8383";
+	    var name = "Learnway 화상강의";
+	    var win = window.open(url, name);
+	    win.focus();
+	    open();
+	}
+	
+
+
+</script>
 </head>
 <body>
 <%
@@ -148,7 +167,8 @@ img{
                   
                    <div class="form-group">
 	                    <input class="btn btn-dark" type="button" value="강의목록" onclick="location.href='myclasslist.jsp?id=<%=member_id%>'"><br><br>
-						<input class="btn btn-dark" type="button" value="실시간 강의 시작" onclick=""><br><br>
+						<input class="btn btn-dark" type="button" value="실시간 강의 시작" onclick="webrtc();"><br><br>
+						<input class="btn btn-dark" type="button" value="실시간 강의 주소 입력" onclick="linkinsert();"><br><br>
 						<input class="btn btn-dark" type="button" value="회원 탈퇴" onclick="location.href='myclass_memdel.jsp?id=<%=member_id%>'"><br><br>
 						<input class="btn btn-dark" type="button" value="돌아가기" onclick="location.href='../index.jsp?id=<%=member_id%>'">
                    </div>

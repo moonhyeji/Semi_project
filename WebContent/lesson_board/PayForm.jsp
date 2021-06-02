@@ -1,7 +1,12 @@
 <%@page import="com.login.biz.LoginBiz"%>
 <%@page import="com.login.dto.LoginDto"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+request.setCharacterEncoding("UTF-8");
+response.setContentType("texthtml; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +73,8 @@
 <body>
 <%
 	String member_id = request.getParameter("id");
-
+	int price = Integer.parseInt(request.getParameter("price"));
+	int class_no = Integer.parseInt(request.getParameter("class_no"));
 	
 
 	System.out.println(member_id);
@@ -85,7 +91,8 @@
 	
 	<div class="payform">
 	<form action="kakao.jsp">
-	
+	<input type="hidden" name="class_no" value="<%=class_no %>">
+	<input type="hidden" name="member_id" value="<%=member_id %>">
 	<div class="pay_text1"><b>결제하기</b></div>
 	<div class="pay_text2"><b>주문 정보</b></div>
 		<p>
@@ -98,7 +105,7 @@
 		</p>	
 		<p class="pay_text3">
 			<b>결제 금액</b><br>
-			<input name="totalPrice">
+			<input name="totalPrice" value="<%=price%>" readonly="readonly">
 		</p>
 		<input type="checkbox">개인정보 제3자 제공에 동의합니다. </br></br>
 		

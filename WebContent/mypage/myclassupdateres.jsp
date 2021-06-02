@@ -1,4 +1,3 @@
-
 <%@page import="com.lesson.dto.LessonDto"%>
 <%@page import="com.lesson.biz.LessonBiz"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -49,7 +48,7 @@ String class_title = request.getParameter("class_title");
 String class_content = request.getParameter("class_content");
 
 
-
+String class_writer = request.getParameter("class_writer");
 
     //--------------------------------------------------
     LessonDto dto = new LessonDto();
@@ -66,6 +65,8 @@ String class_content = request.getParameter("class_content");
     dto.setClass_eventlastdate(class_eventlastdate);
     dto.setClass_eventprice(class_eventprice);
     
+    dto.setClass_writer(class_writer);
+    
     dto.setClass_title(class_title);
     dto.setClass_content(class_content);
     //여기 까지 해서 ()_안의 변수들이 dto에 셋팅되고, 
@@ -73,7 +74,7 @@ String class_content = request.getParameter("class_content");
    
     
     int res = biz.update(dto);  //여기서 의 dto가 위에서 셋팅된 애들. 덩어리.  
-    //dto를 아규먼트로 넘겨줌. update실행 할 때 , 
+    //dto를 아규먼트로 넘겨줌. update실행 할 때, 
     //int res = 1;
     
     

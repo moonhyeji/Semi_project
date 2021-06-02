@@ -15,6 +15,22 @@ public class LessonBiz {
 	}
 	
 	
+	////////////////////////////////////////////
+	
+	public List<LessonDto> eventList(){
+		return dao.eventList();
+	}
+	
+	public List<LessonDto> viewList(){
+		return dao.viewList();
+	}
+	
+	public List<LessonDto> classSearch(String text){
+		return dao.classSearch(text);
+	}
+	
+	////////////////////////////////////////////////
+	
 	
 	
    public List<LessonDto> select_tchlist(String class_writer){
@@ -23,26 +39,11 @@ public class LessonBiz {
    }
    
    
-   
+   public List<LessonDto> classList(int class_tag){
+	   return dao.classList(class_tag);
+   }
 
-	public LessonDto selectOne(int class_no) {
-//
-//LessonDto dto = new LessonDto();
-//		System.out.println(dto.getClass_writer());
-//		System.out.println(dto.getClass_tag());
-//		System.out.println(dto.getClass_startdate());
-//		System.out.println(dto.getClass_lastdate());
-//		System.out.println(dto.getClass_price());
-//		System.out.println(dto.getClass_count());
-//		
-//		System.out.println(dto.getClass_eventstartdate());
-//		System.out.println(dto.getClass_eventlastdate());
-//		System.out.println(dto.getClass_title());
-//		System.out.println(dto.getClass_content());
-//		System.out.println(dto.getClass_eventcheck());
-//		System.out.println(dto.getClass_eventprice());
-
-		
+	public LessonDto selectOne(int class_no) {		
 		return dao.selectOne(class_no);			
 	}
 	
@@ -60,6 +61,10 @@ public class LessonBiz {
 	
 	public int update(LessonDto dto) {
 		return dao.update(dto);
+	}
+	
+	public int viewupdate(String title) {
+		return dao.viewupdate(title);
 	}
 	
 	public int delete(int class_no) {

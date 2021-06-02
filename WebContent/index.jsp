@@ -1,3 +1,8 @@
+<%@page import="com.media.dto.MediaDto"%>
+<%@page import="com.media.biz.MediaBiz"%>
+<%@page import="java.util.List"%>
+<%@page import="com.lesson.biz.LessonBiz"%>
+<%@page import="com.lesson.dto.LessonDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -30,19 +35,97 @@ response.setContentType("texthtml; charset=UTF-8");
 			$('.mypage').css("display", "block"); 
 			$('.btn-group').css("display", "block");
 		}
+		
 	});
+	
+	
 	
 </script>
 
+<script type="text/javascript">
+	var now_img; //현재 이미지
+	var last_img;//마지막 이미지
+	
+	var cnt = 0;
+	
+	
+	window.onload = function() {
+	   //setInterval("fn_change()",3000);
+	   //setInterval(호출함수 , 시간) : 일정시간 간격으로 작업수행이 필요한 경우
+	   setInterval("section_change()",2500);
+	}
+
+	function section_change() {
+		   
+		   //마지막 이미지를 첫번째로 옮긴다.
+		   
+		    
+		   if (cnt > 2){
+		      $("input[name='slide']:radio").eq(cnt).prop('checked',false);
+		      cnt = 0;
+		      
+		      $("input[name='slide']:radio").eq(cnt).prop('checked',true);
+		      cnt++;
+		   }else {
+		      
+		      $("input[name='slide']:radio").eq(cnt-1).prop('checked',false);
+		      
+		      $("input[name='slide']:radio").eq(cnt).prop('checked',true);
+		      cnt++;
+		   }
+		   
+		     
+		}
+</script>
+
 <style type="text/css">
-*{
 
-font-family: 'Bree Serif', serif;
+.card-teacher{
+	margin: 5px 0;
+	font-size: 13px;
+	color: gray;
+	
+}
 
+.card-title{
+	font-size: 20px;
+	font-weight: 600;
+	color: rgb(60,60,60);
+	
+}
+
+.card-text{
+	padding:5px 0 0 0px;
+	margin: 5px 0;
+	font-size: 15px;
+	height:300px;
+	color: gray;
+}
+
+.card-price{
+	padding:15px 0 0 0px;
+	font-size: 15px;
+	color: #FF3232;
 }
 
 
+.card{
+	border-radius: 30px;
+	margin-bottom: 30px;
+}
 
+#searh_btn{
+	background-image: url('resources/image/search_icon.png'); 
+	background-repeat: no-repeat; 
+	outline: 0; 
+	border: 0px; 
+	cursor:pointer; 
+	height:30px; 
+	width:30px;
+	float: right;
+	background-color: rgba( 255, 255, 255, 0 );
+	background-position: 0px 0px;
+}
 
 
 </style>
@@ -58,24 +141,26 @@ font-family: 'Bree Serif', serif;
 	<header>
 	   <!-- 로고 -->
 	   <ul class="header-list">
-	      <li><div><a href="../index.jsp?id=<%=member_id%>"><img alt="로고" src="resources/image/LearnWay4.png" width="170px" height="40px"/></div></a></li>
+	      <li><div><a href="index.jsp?id=<%=member_id%>"><img alt="로고" src="resources/image/LearnWay.png"/></div></a></li>
 	      
 	   <!-- 검색창 -->   
 	      <li>
-	      <div class="searchContainer" style="margin-left: 100px">
-	         <div class="search_Box">
-	            <table class="search_Elements">
-	               <tr>
-	                  <td>
-	                     <input style="font-family: 'Acme', sans-serif; font-weight:bold; font-size:12pt;" type="text" placeholder="찾으시는 클래스가 있으신가요?" class="search">
-	                  </td>
-	                  <td>
-	                     <a href="#"><img src="resources/image/search_icon.png" style="float: right;"/></a>
-	                  </td>
-	               </tr>
-	            </table>
-	         </div>
-	      </div>
+	      <form action="lesson_board/lesson_list.jsp?id=<%=member_id%>&class_tag=0" method="post">
+		      <div class="searchContainer" style="margin-left: 100px">
+		         <div class="search_Box">
+		            <table class="search_Elements">
+		               <tr>
+		                  <td>
+		                     <input style="font-family: 'Acme', sans-serif; font-weight:bold; font-size:12pt;" type="text" placeholder="찾으시는 클래스가 있으신가요?" class="search" name="search_text">
+		                  </td>
+		                  <td style="padding-top: 5px;">
+		                     <input type="submit" id="searh_btn" value="" >
+		                  </td>
+		               </tr>
+		            </table>
+		         </div>
+		      </div>
+	      </form>
 	      </li>
 	         
 	 
@@ -86,7 +171,7 @@ font-family: 'Bree Serif', serif;
 				    Menu
 				  </button>
 				  <ul class="dropdown-menu">
-				    <li><a style="font-family: 'Acme', sans-serif; font-weight:bold" class="dropdown-item" href="lesson_board/lesson_list.jsp?id=<%=member_id%>">강의</a></li>
+				    <li><a style="font-family: 'Acme', sans-serif; font-weight:bold" class="dropdown-item" href="lesson_board/lesson_list.jsp?id=<%=member_id%>&class_tag=0">강의</a></li>
 				    <li><a style="font-family: 'Acme', sans-serif; font-weight:bold"class="dropdown-item" href="event_board/event_list.jsp?id=<%=member_id%>">이벤트</a></li>
 				    <li><a style="font-family: 'Acme', sans-serif; font-weight:bold"class="dropdown-item" href="notice_board/noti_list.jsp?id=<%=member_id%>">공지사항</a></li>
 				    <li><a style="font-family: 'Acme', sans-serif; font-weight:bold"class="dropdown-item" href="cs_board/cs_list.jsp?id=<%=member_id%>">고객센터</a></li>
@@ -117,7 +202,7 @@ font-family: 'Bree Serif', serif;
 	
 	</header>
 
-<main>
+<main style=" height:100%">
 
 <div class="section">
    <input type="radio" name="slide" id="slide01" checked>
@@ -127,35 +212,36 @@ font-family: 'Bree Serif', serif;
       
       <ul class="slidelist">
          <!-- 슬라이드 영역 -->
+         
          <li class="slideitem">
             <a>
                <div class="textbox">
                   <h3 style="font-family: 'Acme', sans-serif; font-weight:bold">새로운 취미 찾기</h3>
                   <p style="font-family: 'Acme', sans-serif; font-weight:bold">온라인으로 편하게 즐기세요!</p>
-               </div> .............................................
-               <img src="resources/image/slide_camera.png">
+               </div>
+               <img src="resources/image/slide_camera.png" >
             </a>
          </li>
+         
          <li class="slideitem">
             <a>
-               
-               <div class="textbox">
-                  <h3></h3>
-                  <p></p>
+           		<div class="textbox">
+                  <h3 style="font-family: 'Acme', sans-serif; font-weight:bold">새로운 취미 찾기</h3>
+                  <p style="font-family: 'Acme', sans-serif; font-weight:bold">온라인으로 편하게 즐기세요!</p>
                </div>
                <img src="resources/image/slide_painting.png">
             </a>
          </li>
+         
          <li class="slideitem">
             <a>
-               
                <div class="textbox">
                   <h3></h3>
                   <p></p>
                </div>
-               <img src="resources/image/slide_yoga.png">
+               <img src="resources/image/slide_yoga.png" >
             </a>
-         </li class="slideitem">
+         </li>
 
          <!-- 좌,우 슬라이드 버튼 -->
          <div class="slide-control">
@@ -184,23 +270,111 @@ font-family: 'Bree Serif', serif;
 </div>
 
    <div class="category">
-      <a href="#"><i class="fas fa-desktop"></i> IT</a>
-      <a href="#"><i class="fas fa-utensils"></i> Cooking</a>
-      <a href="#"><i class="fas fa-language"></i> Language</a>
-      <a href="#"><i class="fas fa-coins"></i> Stock</a>
-      <a href="#"><i class="fas fa-palette"></i> Art</a>
-      <a href="#"><i class="fas fa-running"></i> Sport</a>
+      <a href="lesson_board/lesson_list.jsp?class_tag=0&id=<%=member_id%>"><i class="fas fa-desktop"></i> IT</a>
+      <a href="lesson_board/lesson_list.jsp?class_tag=1&id=<%=member_id%>"><i class="fas fa-utensils"></i> Cooking</a>
+      <a href="lesson_board/lesson_list.jsp?class_tag=2&id=<%=member_id%>"><i class="fas fa-language"></i> Language</a>
+      <a href="lesson_board/lesson_list.jsp?class_tag=3&id=<%=member_id%>"><i class="fas fa-coins"></i> Stock</a>
+      <a href="lesson_board/lesson_list.jsp?class_tag=4&id=<%=member_id%>"><i class="fas fa-palette"></i> Art</a>
+      <a href="lesson_board/lesson_list.jsp?class_tag=5&id=<%=member_id%>"><i class="fas fa-running"></i> Sport</a>
       <a href="map/kakaomap2.jsp?id=<%=member_id%>"><i class="fas fa-map-marked"></i> Around Teacher</a>
    </div>
    
-   <section style="font-family: 'Acme', sans-serif; font-weight:bold">
-      <div class="sec_title" style="font-family: 'Acme', sans-serif; font-weight:bold">인기 CLASS</div>
-      내용
+<!-- 인기 클래스 -->
+   <section style="font-family: 'Acme', sans-serif; font-weight:bold;margin-left: 100px; margin-right: 450px; margin-bottom: 50px; border-top: 1px solid gray; padding-top: 30px; width:70rem ">
+      <div class="sec_title" style="font-family: 'Acme', sans-serif; font-weight:bold; margin-bottom: 30px;">인기 CLASS</div>
+     	<article>
+		 <div class="container" style="width: 70rem;">
+		      <div class="row">
+		      
+		      
+		      
+		      
+<%
+	LessonBiz viewbiz = new LessonBiz();
+	List<LessonDto> viewlist = viewbiz.viewList();
+	
+	
+	for(int i = 0; i<4; i++){
+		LessonDto ldto = new LessonDto();
+		ldto = viewlist.get(i);
+		
+		MediaBiz mbiz = new MediaBiz();
+		String class_title = ldto.getClass_title();
+		MediaDto mdto = mbiz.mediaOne(class_title);
+		String path = mdto.getMedia_path();
+		//외부 접속 시 아이피 변경
+		String ip = "49.170.22.193";
+		
+		String realPath = path.replace("localhost", ip);
+%>
+		     	<div class="col-md-3">
+		     	<div class="card">
+			      	<img src="<%=realPath %>" style="width: 235px; height: 200px; padding: 10px;" />
+				    <div class="card-body">
+				     <p class="card-teacher"><%=ldto.getClass_writer() %><p>
+				     <h5 class="card-title"><%=ldto.getClass_title() %></h5>
+				     <p class="card-price"><b><%=ldto.getClass_price() %>원</b></p>
+				     <div class="card-button"><a href="lesson_board/lessonselectone.jsp?id=<%=member_id %>&class_no=<%=ldto.getClass_no() %>" class="btn btn-outline-dark w-100">수강하기</a></div>
+				     </div>
+				</div>
+			    </div>
+<%
+	}
+%>
+			    
+			    
+		      </div>
+		 </div>
+		</article>
    </section>
-   
-   <section style="font-family: 'Acme', sans-serif; font-weight:bold">
-      <div class="sec_title" style="font-family: 'Acme', sans-serif; font-weight:bold">진행중인 EVENT</div>
-      내용
+
+<!-- 진행중인 이벤트 -->   
+   <section style="font-family: 'Acme', sans-serif; font-weight:bold;margin-left: 100px; margin-right: 450px; margin-bottom: 50px; border-top: 1px solid gray; padding-top: 30px; padding-bottom: 50px; width:70rem " >
+      <div class="sec_title" style="font-family: 'Acme', sans-serif; font-weight:bold; margin-bottom:30px;">진행중인 EVENT</div>
+           	<article>
+		 <div class="container" style="width: 70rem;">
+		      <div class="row">	  
+<%
+	LessonBiz eventbiz = new LessonBiz();
+	List<LessonDto> eventlist = eventbiz.eventList();
+	
+	
+	for(int i = 0; i< 4; i++){
+		LessonDto evdto = new LessonDto();
+		evdto = eventlist.get(i);
+		
+		MediaBiz evmbiz = new MediaBiz();
+		String event_title = evdto.getClass_title();
+		MediaDto evmdto = evmbiz.mediaOne(event_title);
+		String evpath = evmdto.getMedia_path();
+		
+		//외부 접속 시 아이피 변경
+		String evip = "49.170.22.193";
+		
+		String evrealPath = evpath.replace("localhost", evip);
+%>		      
+		      
+		        
+		      <!-- 이벤트 출력 -->
+		     	<div class="col-md-3">
+		     	<div class="card">
+			      	<img src="<%=evrealPath %>" style="width: 235px; height: 200px; padding: 10px;" />
+				    <div class="card-body">
+				         <p class="card-teacher"><%=evdto.getClass_writer() %><p>
+				         <h5 class="card-title"><%=evdto.getClass_title() %></h5>
+				         <p class="card-price"><small><s style="color: black"><%=evdto.getClass_price() %>원</s></small> → <b style="color:#FF3232;"><%=evdto.getClass_eventprice() %>원</b></p>
+				     <div class="card-button"><a href="lesson_board/lessonselectone.jsp?id=<%=member_id %>&class_no=<%=evdto.getClass_no() %>" class="btn btn-outline-dark w-100">수강하기</a></div>
+				     </div>
+			    </div>
+			    </div>
+			   <!-- 이벤트 출력 -->
+<%
+	}
+%>		    
+			    
+		      </div>
+		 </div>
+		</article>
    </section>
 </main>
 <!-- Channel Plugin Scripts -->
@@ -244,7 +418,7 @@ font-family: 'Bree Serif', serif;
     "pluginKey": "72cd9e68-28fb-4db9-b3a8-fb3abf795732"
   });
 </script>
-<!-- End Channel Plugin -->
+<!— End Channel Plugin —>
 <jsp:include page="footer.jsp?id=<%=member_id %>"></jsp:include>
 </body>
 </html>

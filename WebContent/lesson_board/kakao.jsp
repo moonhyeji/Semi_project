@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%
+request.setCharacterEncoding("UTF-8");
+response.setContentType("texthtml; charset=UTF-8");
+%>
+    
     
 <%
      String name = (String)request.getParameter("name");
      String phone = (String)request.getParameter("phone");
      String address = (String)request.getParameter("address");
      String stotalPrice = (String)request.getParameter("totalPrice");
+     String member_id = request.getParameter("member_id");
+     int class_no = Integer.parseInt(request.getParameter("class_no"));
+     
      int totalPrice = Integer.parseInt(stotalPrice);
     
      System.out.println("name: "+name);
@@ -67,14 +75,12 @@ $(function(){
                 }
             });
    	
-            location.href='paySuccess.jsp?msg='+msg;
+            location.href='paySuccess.jsp?member_id=<%=member_id%>&class_no=<%=class_no%>&msg='+msg;
         } else {
             var msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
-
-       
             alert(msg);
-            location.href="PayFail.jsp";
+            self.close();
         }
     });
     

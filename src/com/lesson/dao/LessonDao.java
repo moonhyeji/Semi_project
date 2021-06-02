@@ -12,6 +12,8 @@ public class LessonDao extends SqlMapConfig{
 	private String namespace = "com.lesson.mapper.";
 
 	
+	
+	
 	public List<LessonDto> selectList(){
 		SqlSession session = getSessionFactory().openSession();
         List<LessonDto> list = session.selectList("com.lesson.mapper."+"selectList");
@@ -19,15 +21,49 @@ public class LessonDao extends SqlMapConfig{
         session.close();
         return list;
 	}
-	//select_tchlist
-	                                       //메소드를 호출할 때 받는 아규먼트를 받은 파라미터  
+	
+	//이벤트 강의 리스트
+	public List<LessonDto> eventList(){
+		SqlSession session = getSessionFactory().openSession();
+        List<LessonDto> list = session.selectList("com.lesson.mapper."+"eventList");
+		
+        session.close();
+        return list;
+	}
+	
+	//인기 강의 리스트
+	public List<LessonDto> viewList(){
+		SqlSession session = getSessionFactory().openSession();
+        List<LessonDto> list = session.selectList("com.lesson.mapper."+"viewList");
+		
+        session.close();
+        return list;
+	}
+	
+	//선생 강의 리스트	
 	public List<LessonDto> select_tchlist(String class_writer){
 		
-		SqlSession session = getSessionFactory().openSession();    //위치      //아규먼트로 mapper에 보내주는값 . 
+		SqlSession session = getSessionFactory().openSession();    
 		List<LessonDto> list = session.selectList(namespace + "select_tchlist", class_writer); 
-		                            //가져올 거 적는 곳, 이름 아니라.
+		                           
 		return list;
 		
+	}
+	
+	public List<LessonDto> classSearch(String text){
+		SqlSession session = getSessionFactory().openSession();    
+		List<LessonDto> list = session.selectList(namespace + "classSearch", text); 
+		                           
+		return list;
+	}
+
+	//각 클래스별 강의 리스트
+	public List<LessonDto> classList(int class_tag){
+		SqlSession session = getSessionFactory().openSession();
+        List<LessonDto> list = session.selectList("com.lesson.mapper."+"classList",class_tag);
+		
+        session.close();
+        return list;
 	}
 	
 	//selectOne
@@ -50,11 +86,6 @@ public class LessonDao extends SqlMapConfig{
 	
 	
 	public int insert(LessonDto dto) {
-		
-		
-		
-		
-		
 		int res = 0;
 
 		try(SqlSession session = getSessionFactory().openSession(true)){
@@ -70,6 +101,15 @@ public class LessonDao extends SqlMapConfig{
 
 		try(SqlSession session = getSessionFactory().openSession(true)){
 			res = session.update(namespace+"update",dto);	
+		}	
+		return res;
+	}
+	
+	public int viewupdate(String title) {
+		int res = 0;
+
+		try(SqlSession session = getSessionFactory().openSession(true)){
+			res = session.update(namespace+"viewupdate",title);	
 		}	
 		return res;
 	}

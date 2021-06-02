@@ -57,7 +57,7 @@ public class LoginBiz {
 		return dao.mypageView(member_id);
 	}
 	
-	//¸¶ÀÌ ÆäÀÌÁö
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public int memberdel(String member_id) {
 		return dao.memberdel(member_id);
@@ -65,6 +65,10 @@ public class LoginBiz {
 	
 	public int mypageupdate(Map map) {
 		return dao.mypageupdate(map);
+	}
+	
+	public String selectone(String email,String platform){
+		return dao.selectone(email, platform);
 	}
 	
 }

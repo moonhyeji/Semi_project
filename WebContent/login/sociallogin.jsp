@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+s<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,51 +54,74 @@ function onSignIn(googleUser) {
 	-->
 
 
-	<!--  naver login-->
-	<script type="text/javascript"
-		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-		charset="utf-8"></script>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-	<div id="naver_id_login"></div>
-	<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-	<script type="text/javascript">
-		var naver_id_login = new naver_id_login("nJbGfCmcDQzFrSV8nNeM",
-				"http://localhost:8787/Test01_Hello/callback.html");
-		var state = naver_id_login.getUniqState();
-		naver_id_login.setButton("white", 2, 40);
-		naver_id_login.setDomain("y826gT7iVo");
-		naver_id_login.setState(state);
-		naver_id_login.setPopup();
-		naver_id_login.init_naver_id_login();
-	</script>
+   <!--  naver login-->
+   <script type="text/javascript"
+      src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+      charset="utf-8"></script>
+   <script type="text/javascript"
+      src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+   <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+   <div id="naver_id_login"></div>
+   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+   <script type="text/javascript">
+      var naver_id_login = new naver_id_login("iPebPScsoiwrYEwp5EO9",
+            "http://49.170.22.193:8787/LearnWay_2week/login/callback_naver.jsp");
+      var state = naver_id_login.getUniqState();
+      naver_id_login.setButton("white", 2, 50);
+      naver_id_login.setDomain("y826gT7iVo"); // 이건 뭐지??
+      naver_id_login.setState(state);
+      naver_id_login.setPopup();
+      naver_id_login.init_naver_id_login();
+   </script>
 <br>
 
 
 
 
+
+
+
 <!--  카카오톡 -->
-
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-	<a id="kakao-login-btn"></a>
-	<a href="http://developers.kakao.com/logout"></a>
-	<script type='text/javascript'>
-		//<![CDATA[
-		// 사용할 앱의 JavaScript 키를 설정해 주세요.
-		Kakao.init('6f51ecf6f7e6c23a0573d217272da08e'); //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
-		// 카카오 로그인 버튼을 생성합니다.
-		Kakao.Auth.createLoginButton({
-			container : '#kakao-login-btn',
-			success : function(authObj) {
-				alert(JSON.stringify(authObj));
-			},
-			fail : function(err) {
-				alert(JSON.stringify(err));
-			}
-		});
-	</script>
+   <a id="kakao-login-btn"></a>
+   <a href="http://developers.kakao.com/logout"></a>
+   <script type='text/javascript'>
+   //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('a73f4d1f0ed420f290f1ee269cadf83b'); //여기서 아까 발급받은 키 중 javascript키를 사용해준다.
+    // 카카오 로그인 버튼을 생성합니다.
+    Kakao.Auth.createLoginButton({
+       container : '#kakao-login-btn',
+       success : function( authObj ) {
+          
+          Kakao.API.request({
+                 url: '/v2/user/me',
+                 success: function(res) {
 
+                   var userid = res.kakao_account.profile.nickname
+                   var email = res.kakao_account.email
+       
+                   
+               if (typeof email == "undefined") {                    
+                         location.href=  'social_regist.jsp?userid=' + userid +'&email=' +email;
+                         
+               } else {
+                  
+                  location.href=  '../index.jsp?id=' + email;
+               }
+                   
+                   },
+                 fail: function(error) {
+                   alert(JSON.stringify(error));
+                 }
+               });
+             },
+             fail: function(err) {
+               alert(JSON.stringify(err));
+             }
+           });
+         //]]>
+       </script>
 <br>
 <br>
 
